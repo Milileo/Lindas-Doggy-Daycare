@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linda's Doggy Daycare – Choulou, Paphos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-lang="de">
+
+  <!-- HEADER -->
+  <header id="header">
+    <div class="header-inner">
+      <a href="#hero" class="logo">
+        <span class="logo-paw">🐾</span>
+        <span class="logo-text">Linda's Doggy Daycare</span>
+      </a>
+      <div class="header-right">
+        <!-- Language Switch -->
+        <div class="lang-switch">
+          <button class="lang-btn active" data-lang="de" onclick="setLang('de')">🇩🇪</button>
+          <span class="lang-sep">|</span>
+          <button class="lang-btn" data-lang="en" onclick="setLang('en')">🇬🇧</button>
+        </div>
+        <!-- Burger -->
+        <button class="burger" id="burgerBtn" aria-label="Menü öffnen" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Nav -->
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="#about" onclick="closeMenu()" data-de="Über Linda" data-en="About Linda">Über Linda</a>
+      <a href="#services" onclick="closeMenu()" data-de="Leistungen" data-en="Services">Leistungen</a>
+      <a href="#location" onclick="closeMenu()" data-de="Standort" data-en="Location">Standort</a>
+      <a href="#contact" onclick="closeMenu()" data-de="Kontakt" data-en="Contact">Kontakt</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-pre" data-de="Willkommen bei" data-en="Welcome to">Willkommen bei</p>
+      <h1 class="hero-title">Linda's Doggy Daycare</h1>
+      <p class="hero-slogan" data-de="Ein Zuhause auf Zeit – für deinen besten Freund 🐾" data-en="A home away from home – for your best friend 🐾">Ein Zuhause auf Zeit – für deinen besten Freund 🐾</p>
+      <div class="hero-intro">
+        <p class="lang-de">Hallo zusammen 👋🏻<br>
+        Ich bin Linda und kümmere mich um deinen Hund, wenn du unterwegs bist – egal ob Tagesbetreuung oder mehrere Tage/Wochen 🐶<br><br>
+        Ich lebe mit meinem Mann in einem schönen Haus mit großem Garten in Choulou (Paphos). Ich bin Vollzeit-Hundemama und habe viel Zeit. Wir möchten Hunden ein Zuhause auf Zeit geben – ohne Zwinger, mit viel Spiel, Kuscheln und einer gemeinsamen Couch ❤️🐾</p>
+        <p class="lang-en" style="display:none;">Hi everyone 👋🏻<br>
+        I'm Linda and I take care of your Dog while you're away. Whether it's only for Daycare or Petboarding for several days/weeks 🐶<br><br>
+        I live with my husband in a wonderful house with a big garden in Choulou (Paphos). I'm a stay-at-home dogmom with plenty of time. We want to give dogs a place that feels like home! No kennels, lots of play, cuddles and a shared couch ❤️🐾</p>
+      </div>
+      <a href="#contact" class="btn-primary">
+        <span class="lang-de">Jetzt anfragen</span>
+        <span class="lang-en" style="display:none;">Get in touch</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-label" data-de="Über mich" data-en="About me">Über mich</div>
+      <h2 class="section-title">
+        <span class="lang-de">Hallo, ich bin Linda!</span>
+        <span class="lang-en" style="display:none;">Hello, I'm Linda!</span>
+      </h2>
+      <div class="about-grid">
+        <div class="about-photo">
+          <div class="photo-placeholder">🐕</div>
+        </div>
+        <div class="about-text">
+          <p class="lang-de">Ich bin Vollzeit-Hundemama und lebe mit meinem Mann in Choulou, einem ruhigen Dorf im Bezirk Paphos auf Zypern. Unser Haus hat einen großen, grünen Garten – perfekt zum Toben und Entspannen.</p>
+          <p class="lang-en" style="display:none;">I'm a full-time dog mom living with my husband in Choulou, a quiet village in the Paphos district of Cyprus. Our house has a large, green garden – perfect for running around and relaxing.</p>
+          <p class="lang-de">Für mich ist jeder Hund ein Familienmitglied. Kein Zwinger, kein Stress – dein Hund darf auf dem Sofa liegen, spielen und einfach er selbst sein. Kleine Gruppen garantieren maximale Aufmerksamkeit.</p>
+          <p class="lang-en" style="display:none;">For me, every dog is a family member. No kennels, no stress – your dog gets to relax on the couch, play, and just be themselves. Small groups guarantee maximum attention.</p>
+          <div class="about-badges">
+            <span class="badge">🏡 <span data-de="Häusliches Umfeld" data-en="Home environment">Häusliches Umfeld</span></span>
+            <span class="badge">🌿 <span data-de="Großer Garten" data-en="Big garden">Großer Garten</span></span>
+            <span class="badge">❤️ <span data-de="Volle Aufmerksamkeit" data-en="Full attention">Volle Aufmerksamkeit</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <div class="section-label" data-de="Leistungen" data-en="Services">Leistungen</div>
+      <h2 class="section-title">
+        <span class="lang-de">Was ich anbiete</span>
+        <span class="lang-en" style="display:none;">What I offer</span>
+      </h2>
+      <p class="section-sub lang-de">Kleine Gruppen – Maximale Aufmerksamkeit!</p>
+      <p class="section-sub lang-en" style="display:none;">Small Groups – Maximum Attention!</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🏠</div>
+          <h3 class="service-title">Petsitting</h3>
+          <p class="lang-de">Ganztags oder stundenweise – flexibel in meinem häuslichen Umfeld. Kein Zwinger, dafür ein grüner Garten und ein echtes Zuhause.</p>
+          <p class="lang-en" style="display:none;">Full day or hourly – flexible in a home environment. No kennels, just a green garden and a real home.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🦮</div>
+          <h3 class="service-title">Walking</h3>
+          <p class="lang-de">Abenteuerliche Spaziergänge zweimal täglich – keine befahrenen Straßen, viel Freilauf und Natur pur.</p>
+          <p class="lang-en" style="display:none;">Adventurous strolls twice a day – no busy roads, plenty of off-leash fun in nature.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🍖</div>
+          <h3 class="service-title">Feeding</h3>
+          <p class="lang-de">Individuelle Mahlzeiten, die auf die Ernährungsbedürfnisse deines Hundes abgestimmt sind.</p>
+          <p class="lang-en" style="display:none;">Tailored meals crafted to meet your dog's individual dietary needs.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🤗</div>
+          <h3 class="service-title">Love & Cuddles</h3>
+          <p class="lang-de">Unendliche persönliche Aufmerksamkeit – dein Hund wird geliebt wie ein Familienmitglied.</p>
+          <p class="lang-en" style="display:none;">Endless individual attention – your dog will be loved like a member of the family.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section id="location">
+    <div class="container">
+      <div class="section-label" data-de="Standort" data-en="Location">Standort</div>
+      <h2 class="section-title">
+        <span class="lang-de">Wo wir sind</span>
+        <span class="lang-en" style="display:none;">Where we are</span>
+      </h2>
+      <div class="location-grid">
+        <div class="location-text">
+          <div class="location-pin">📍</div>
+          <h3>Choulou, Paphos District</h3>
+          <p class="lang-de">Wir befinden uns in Choulou, einem wunderschönen, ruhigen Dorf im Bezirk Paphos, Zypern. Die Natur direkt vor der Haustür – ideal für lange Spaziergänge und entspannte Betreuung.</p>
+          <p class="lang-en" style="display:none;">We're located in Choulou, a beautiful quiet village in the Paphos District, Cyprus. Nature right at our doorstep – perfect for long walks and relaxed care.</p>
+          <a href="https://maps.google.com/?q=Choulou,Paphos,Cyprus" target="_blank" class="btn-secondary">
+            <span class="lang-de">Auf Google Maps ansehen</span>
+            <span class="lang-en" style="display:none;">View on Google Maps</span>
+          </a>
+        </div>
+        <div class="location-map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3277.0!2d32.5!3d34.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14e706b6d9fec9a7%3A0x6a5b5e2a6e5b5e2a!2sChoulou%2C+Cyprus!5e0!3m2!1sen!2s!4v1609459200000!5m2!1sen!2s"
+            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+            title="Choulou, Paphos, Cyprus"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-label" data-de="Kontakt" data-en="Contact">Kontakt</div>
+      <h2 class="section-title">
+        <span class="lang-de">Schreib mir!</span>
+        <span class="lang-en" style="display:none;">Get in touch!</span>
+      </h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-item">
+            <span class="contact-icon">📞</span>
+            <div>
+              <p class="contact-label" data-de="Telefon" data-en="Phone">Telefon</p>
+              <a href="tel:+35794567136" class="contact-value">+357 94 567 136</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📸</span>
+            <div>
+              <p class="contact-label">Instagram</p>
+              <a href="https://instagram.com/lindasdoggydaycare" target="_blank" class="contact-value">@lindasdoggydaycare</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            <div>
+              <p class="contact-label" data-de="Standort" data-en="Location">Standort</p>
+              <span class="contact-value">Choulou, Paphos, Cyprus</span>
+            </div>
+          </div>
+        </div>
+        <form class="contact-form" id="contactForm" onsubmit="submitForm(event)">
+          <div class="form-group">
+            <label for="name">
+              <span class="lang-de">Name</span>
+              <span class="lang-en" style="display:none;">Name</span>
+            </label>
+            <input type="text" id="name" name="name" required placeholder="Dein Name / Your name" />
+          </div>
+          <div class="form-group">
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" name="email" required placeholder="deine@email.com" />
+          </div>
+          <div class="form-group">
+            <label for="message">
+              <span class="lang-de">Nachricht</span>
+              <span class="lang-en" style="display:none;">Message</span>
+            </label>
+            <textarea id="message" name="message" rows="5" required placeholder="Deine Nachricht / Your message..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary btn-full">
+            <span class="lang-de">Nachricht senden ✉️</span>
+            <span class="lang-en" style="display:none;">Send message ✉️</span>
+          </button>
+          <div class="form-success" id="formSuccess" style="display:none;">
+            <span class="lang-de">✅ Danke! Ich melde mich bald bei dir.</span>
+            <span class="lang-en" style="display:none;">✅ Thank you! I'll get back to you soon.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <span class="logo-paw">🐾</span>
+          <span>Linda's Doggy Daycare</span>
+        </div>
+        <nav class="footer-nav">
+          <a href="#about" data-de="Über Linda" data-en="About Linda">Über Linda</a>
+          <a href="#services" data-de="Leistungen" data-en="Services">Leistungen</a>
+          <a href="#location" data-de="Standort" data-en="Location">Standort</a>
+          <a href="#contact" data-de="Kontakt" data-en="Contact">Kontakt</a>
+        </nav>
+        <div class="footer-socials">
+          <a href="tel:+35794567136" class="social-link" title="Phone">📞</a>
+          <a href="https://instagram.com/lindasdoggydaycare" target="_blank" class="social-link" title="Instagram">📸</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="lang-de">© 2025 Linda's Doggy Daycare · Choulou, Paphos, Zypern · Mit ❤️ für Hunde</p>
+        <p class="lang-en" style="display:none;">© 2025 Linda's Doggy Daycare · Choulou, Paphos, Cyprus · Made with ❤️ for dogs</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
