@@ -26,8 +26,15 @@ const GALLERY_IMAGES = [
   'https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/8329d02be_photo_2026-06-04_19-44-20.jpg',
   'https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/05b4fc47a_photo_2026-06-04_19-44-23.jpg',
   'https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/54d90b507_photo_2026-06-04_19-44-27.jpg',
-  // slots 11-18: add URLs here when you upload more images
-  null, null, null, null, null, null, null, null
+  // slots 11-18
+  'https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/a5324ba75_photo_2026-06-04_19-50-18.jpg',
+  'https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/2836f7ed1_photo_2026-06-04_19-44-55.jpg',
+  'https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/6892536e7_photo_2026-06-04_19-44-58.jpg',
+  'https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/57c3165ec_photo_2026-06-04_19-45-01.jpg',
+  'https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/4374437b4_photo_2026-06-04_19-45-42.jpg',
+  'https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/f2152c165_photo_2026-06-04_19-45-48.jpg',
+  'https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/ab11610ea_photo_2026-06-04_19-45-54.jpg',
+  'https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/33bbbe352_photo_2026-06-04_19-48-05.jpg'
 ];
 
 // ============================================================
