@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body data-lang="de">
+<body data-lang="en">
 
   <!-- HEADER -->
   <header id="header">
@@ -18,46 +18,54 @@
         <span class="logo-paw">🐾</span>
         <span class="logo-text">Linda's Doggy Daycare</span>
       </a>
+      <div class="header-center">
+        <nav class="desktop-nav" id="desktopNav">
+          <a href="#about"    data-de="Über Linda"  data-en="About Linda">About Linda</a>
+          <a href="#gallery"  data-de="Galerie"     data-en="Gallery">Gallery</a>
+          <a href="#services" data-de="Leistungen"  data-en="Services">Services</a>
+          <a href="#reviews"  data-de="Bewertungen" data-en="Reviews">Reviews</a>
+          <a href="#location" data-de="Standort"    data-en="Location">Location</a>
+          <a href="#contact"  data-de="Kontakt"     data-en="Contact">Contact</a>
+        </nav>
+      </div>
       <div class="header-right">
-        <!-- Language Switch -->
         <div class="lang-switch">
-          <button class="lang-btn active" data-lang="de" onclick="setLang('de')">🇩🇪</button>
+          <button class="lang-btn" data-lang="de" onclick="setLang('de')">🇩🇪</button>
           <span class="lang-sep">|</span>
-          <button class="lang-btn" data-lang="en" onclick="setLang('en')">🇬🇧</button>
+          <button class="lang-btn active" data-lang="en" onclick="setLang('en')">🇬🇧</button>
         </div>
-        <!-- Burger -->
-        <button class="burger" id="burgerBtn" aria-label="Menü öffnen" onclick="toggleMenu()">
+        <button class="burger" id="burgerBtn" aria-label="Open menu" onclick="toggleMenu()">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
-    <!-- Mobile Nav -->
     <nav class="mobile-nav" id="mobileNav">
-      <a href="#about" onclick="closeMenu()" data-de="Über Linda" data-en="About Linda">Über Linda</a>
-      <a href="#services" onclick="closeMenu()" data-de="Leistungen" data-en="Services">Leistungen</a>
-      <a href="#location" onclick="closeMenu()" data-de="Standort" data-en="Location">Standort</a>
-      <a href="#contact" onclick="closeMenu()" data-de="Kontakt" data-en="Contact">Kontakt</a>
+      <a href="#about"    onclick="closeMenu()" data-de="Über Linda"  data-en="About Linda">About Linda</a>
+      <a href="#gallery"  onclick="closeMenu()" data-de="Galerie"     data-en="Gallery">Gallery</a>
+      <a href="#services" onclick="closeMenu()" data-de="Leistungen"  data-en="Services">Services</a>
+      <a href="#reviews"  onclick="closeMenu()" data-de="Bewertungen" data-en="Reviews">Reviews</a>
+      <a href="#location" onclick="closeMenu()" data-de="Standort"    data-en="Location">Location</a>
+      <a href="#contact"  onclick="closeMenu()" data-de="Kontakt"     data-en="Contact">Contact</a>
     </nav>
   </header>
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-overlay"></div>
     <div class="hero-content">
-      <p class="hero-pre" data-de="Willkommen bei" data-en="Welcome to">Willkommen bei</p>
+      <p class="hero-pre" data-de="Willkommen bei" data-en="Welcome to">Welcome to</p>
       <h1 class="hero-title">Linda's Doggy Daycare</h1>
-      <p class="hero-slogan" data-de="Ein Zuhause auf Zeit – für deinen besten Freund 🐾" data-en="A home away from home – for your best friend 🐾">Ein Zuhause auf Zeit – für deinen besten Freund 🐾</p>
+      <p class="hero-slogan" data-de="Ein Zuhause auf Zeit – für deinen besten Freund 🐾" data-en="A home away from home – for your best friend 🐾">A home away from home – for your best friend 🐾</p>
       <div class="hero-intro">
         <p class="lang-de">Hallo zusammen 👋🏻<br>
         Ich bin Linda und kümmere mich um deinen Hund, wenn du unterwegs bist – egal ob Tagesbetreuung oder mehrere Tage/Wochen 🐶<br><br>
         Ich lebe mit meinem Mann in einem schönen Haus mit großem Garten in Choulou (Paphos). Ich bin Vollzeit-Hundemama und habe viel Zeit. Wir möchten Hunden ein Zuhause auf Zeit geben – ohne Zwinger, mit viel Spiel, Kuscheln und einer gemeinsamen Couch ❤️🐾</p>
-        <p class="lang-en" style="display:none;">Hi everyone 👋🏻<br>
+        <p class="lang-en">Hi everyone 👋🏻<br>
         I'm Linda and I take care of your Dog while you're away. Whether it's only for Daycare or Petboarding for several days/weeks 🐶<br><br>
         I live with my husband in a wonderful house with a big garden in Choulou (Paphos). I'm a stay-at-home dogmom with plenty of time. We want to give dogs a place that feels like home! No kennels, lots of play, cuddles and a shared couch ❤️🐾</p>
       </div>
       <a href="#contact" class="btn-primary">
         <span class="lang-de">Jetzt anfragen</span>
-        <span class="lang-en" style="display:none;">Get in touch</span>
+        <span class="lang-en">Get in touch</span>
       </a>
     </div>
   </section>
@@ -65,65 +73,172 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="container">
-      <div class="section-label" data-de="Über mich" data-en="About me">Über mich</div>
+      <div class="section-label" data-de="Über mich" data-en="About me">About me</div>
       <h2 class="section-title">
         <span class="lang-de">Hallo, ich bin Linda!</span>
-        <span class="lang-en" style="display:none;">Hello, I'm Linda!</span>
+        <span class="lang-en">Hello, I'm Linda!</span>
       </h2>
-      <div class="about-grid">
+      <div class="about-grid anim-fade">
         <div class="about-photo">
           <div class="photo-placeholder">🐕</div>
         </div>
         <div class="about-text">
           <p class="lang-de">Ich bin Vollzeit-Hundemama und lebe mit meinem Mann in Choulou, einem ruhigen Dorf im Bezirk Paphos auf Zypern. Unser Haus hat einen großen, grünen Garten – perfekt zum Toben und Entspannen.</p>
-          <p class="lang-en" style="display:none;">I'm a full-time dog mom living with my husband in Choulou, a quiet village in the Paphos district of Cyprus. Our house has a large, green garden – perfect for running around and relaxing.</p>
+          <p class="lang-en">I'm a full-time dog mom living with my husband in Choulou, a quiet village in the Paphos district of Cyprus. Our house has a large, green garden – perfect for running around and relaxing.</p>
           <p class="lang-de">Für mich ist jeder Hund ein Familienmitglied. Kein Zwinger, kein Stress – dein Hund darf auf dem Sofa liegen, spielen und einfach er selbst sein. Kleine Gruppen garantieren maximale Aufmerksamkeit.</p>
-          <p class="lang-en" style="display:none;">For me, every dog is a family member. No kennels, no stress – your dog gets to relax on the couch, play, and just be themselves. Small groups guarantee maximum attention.</p>
+          <p class="lang-en">For me, every dog is a family member. No kennels, no stress – your dog gets to relax on the couch, play, and just be themselves. Small groups guarantee maximum attention.</p>
           <div class="about-badges">
-            <span class="badge">🏡 <span data-de="Häusliches Umfeld" data-en="Home environment">Häusliches Umfeld</span></span>
-            <span class="badge">🌿 <span data-de="Großer Garten" data-en="Big garden">Großer Garten</span></span>
-            <span class="badge">❤️ <span data-de="Volle Aufmerksamkeit" data-en="Full attention">Volle Aufmerksamkeit</span></span>
+            <span class="badge">🏡 <span data-de="Häusliches Umfeld" data-en="Home environment">Home environment</span></span>
+            <span class="badge">🌿 <span data-de="Großer Garten" data-en="Big garden">Big garden</span></span>
+            <span class="badge">❤️ <span data-de="Volle Aufmerksamkeit" data-en="Full attention">Full attention</span></span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="container">
+      <div class="section-label" data-de="Galerie" data-en="Gallery">Gallery</div>
+      <h2 class="section-title">
+        <span class="lang-de">Momente mit unseren Gästen</span>
+        <span class="lang-en">Moments with our guests</span>
+      </h2>
+      <div class="slider-wrapper">
+        <button class="slider-btn slider-prev" onclick="slideGallery(-1)" aria-label="Previous">&#8249;</button>
+        <div class="slider-viewport" id="galleryViewport">
+          <div class="slider-track" id="galleryTrack">
+            <!-- 18 placeholder slides — replace src with real image URLs -->
+            <div class="slide"><div class="slide-img-placeholder">🐶<span>1</span></div></div>
+            <div class="slide"><div class="slide-img-placeholder">🐕<span>2</span></div></div>
+            <div class="slide"><div class="slide-img-placeholder">🐩<span>3</span></div></div>
+            <div class="slide"><div class="slide-img-placeholder">🦮<span>4</span></div></div>
+            <div class="slide"><div class="slide-img-placeholder">🐶<span>5</span></div></div>
+            <div class="slide"><div class="slide-img-placeholder">🐕<span>6</span></div></div>
+            <div class="slide"><div class="slide-img-placeholder">🐩<span>7</span></div></div>
+            <div class="slide"><div class="slide-img-placeholder">🦮<span>8</span></div></div>
+            <div class="slide"><div class="slide-img-placeholder">🐶<span>9</span></div></div>
+            <div class="slide"><div class="slide-img-placeholder">🐕<span>10</span></div></div>
+            <div class="slide"><div class="slide-img-placeholder">🐩<span>11</span></div></div>
+            <div class="slide"><div class="slide-img-placeholder">🦮<span>12</span></div></div>
+            <div class="slide"><div class="slide-img-placeholder">🐶<span>13</span></div></div>
+            <div class="slide"><div class="slide-img-placeholder">🐕<span>14</span></div></div>
+            <div class="slide"><div class="slide-img-placeholder">🐩<span>15</span></div></div>
+            <div class="slide"><div class="slide-img-placeholder">🦮<span>16</span></div></div>
+            <div class="slide"><div class="slide-img-placeholder">🐶<span>17</span></div></div>
+            <div class="slide"><div class="slide-img-placeholder">🐕<span>18</span></div></div>
+          </div>
+        </div>
+        <button class="slider-btn slider-next" onclick="slideGallery(1)" aria-label="Next">&#8250;</button>
+      </div>
+      <div class="slider-dots" id="sliderDots"></div>
+    </div>
+  </section>
+
   <!-- SERVICES -->
   <section id="services">
     <div class="container">
-      <div class="section-label" data-de="Leistungen" data-en="Services">Leistungen</div>
+      <div class="section-label" data-de="Leistungen" data-en="Services">Services</div>
       <h2 class="section-title">
         <span class="lang-de">Was ich anbiete</span>
-        <span class="lang-en" style="display:none;">What I offer</span>
+        <span class="lang-en">What I offer</span>
       </h2>
       <p class="section-sub lang-de">Kleine Gruppen – Maximale Aufmerksamkeit!</p>
-      <p class="section-sub lang-en" style="display:none;">Small Groups – Maximum Attention!</p>
+      <p class="section-sub lang-en">Small Groups – Maximum Attention!</p>
       <div class="services-grid">
-        <div class="service-card">
+        <div class="service-card anim-fade">
           <div class="service-icon">🏠</div>
           <h3 class="service-title">Petsitting</h3>
           <p class="lang-de">Ganztags oder stundenweise – flexibel in meinem häuslichen Umfeld. Kein Zwinger, dafür ein grüner Garten und ein echtes Zuhause.</p>
-          <p class="lang-en" style="display:none;">Full day or hourly – flexible in a home environment. No kennels, just a green garden and a real home.</p>
+          <p class="lang-en">Full day or hourly – flexible in a home environment. No kennels, just a green garden and a real home.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card anim-fade">
           <div class="service-icon">🦮</div>
           <h3 class="service-title">Walking</h3>
           <p class="lang-de">Abenteuerliche Spaziergänge zweimal täglich – keine befahrenen Straßen, viel Freilauf und Natur pur.</p>
-          <p class="lang-en" style="display:none;">Adventurous strolls twice a day – no busy roads, plenty of off-leash fun in nature.</p>
+          <p class="lang-en">Adventurous strolls twice a day – no busy roads, plenty of off-leash fun in nature.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card anim-fade">
           <div class="service-icon">🍖</div>
           <h3 class="service-title">Feeding</h3>
           <p class="lang-de">Individuelle Mahlzeiten, die auf die Ernährungsbedürfnisse deines Hundes abgestimmt sind.</p>
-          <p class="lang-en" style="display:none;">Tailored meals crafted to meet your dog's individual dietary needs.</p>
+          <p class="lang-en">Tailored meals crafted to meet your dog's individual dietary needs.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card anim-fade">
           <div class="service-icon">🤗</div>
           <h3 class="service-title">Love & Cuddles</h3>
           <p class="lang-de">Unendliche persönliche Aufmerksamkeit – dein Hund wird geliebt wie ein Familienmitglied.</p>
-          <p class="lang-en" style="display:none;">Endless individual attention – your dog will be loved like a member of the family.</p>
+          <p class="lang-en">Endless individual attention – your dog will be loved like a member of the family.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews">
+    <div class="container">
+      <div class="section-label" data-de="Bewertungen" data-en="Reviews">Reviews</div>
+      <h2 class="section-title">
+        <span class="lang-de">Was andere sagen</span>
+        <span class="lang-en">What others say</span>
+      </h2>
+
+      <!-- Published reviews list -->
+      <div class="reviews-list" id="reviewsList">
+        <!-- populated by JS from localStorage -->
+      </div>
+      <p class="no-reviews-msg" id="noReviewsMsg" style="display:none;">
+        <span class="lang-de">Noch keine Bewertungen. Sei der Erste! 🐾</span>
+        <span class="lang-en">No reviews yet. Be the first! 🐾</span>
+      </p>
+
+      <!-- Review form -->
+      <div class="review-form-wrap">
+        <h3 class="review-form-title">
+          <span class="lang-de">Bewertung hinterlassen</span>
+          <span class="lang-en">Leave a review</span>
+        </h3>
+        <form class="review-form" id="reviewForm" onsubmit="submitReview(event)">
+          <div class="form-group">
+            <label for="rName">
+              <span class="lang-de">Name</span>
+              <span class="lang-en">Name</span>
+            </label>
+            <input type="text" id="rName" name="rName" required
+              placeholder="Your name / Dein Name" />
+          </div>
+          <div class="form-group">
+            <label>
+              <span class="lang-de">Bewertung</span>
+              <span class="lang-en">Rating</span>
+            </label>
+            <div class="star-input" id="starInput">
+              <button type="button" class="star" data-val="1" onclick="setStars(1)">★</button>
+              <button type="button" class="star" data-val="2" onclick="setStars(2)">★</button>
+              <button type="button" class="star" data-val="3" onclick="setStars(3)">★</button>
+              <button type="button" class="star" data-val="4" onclick="setStars(4)">★</button>
+              <button type="button" class="star" data-val="5" onclick="setStars(5)">★</button>
+            </div>
+            <input type="hidden" id="rStars" name="rStars" value="0" required />
+          </div>
+          <div class="form-group">
+            <label for="rText">
+              <span class="lang-de">Nachricht</span>
+              <span class="lang-en">Message</span>
+            </label>
+            <textarea id="rText" name="rText" rows="4" required
+              placeholder="Your experience... / Deine Erfahrung..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary btn-full">
+            <span class="lang-de">Bewertung absenden ⭐</span>
+            <span class="lang-en">Submit review ⭐</span>
+          </button>
+          <div class="form-success" id="reviewSuccess" style="display:none;">
+            <span class="lang-de">✅ Danke! Deine Bewertung wird nach Freigabe veröffentlicht.</span>
+            <span class="lang-en">✅ Thank you! Your review will be published after approval.</span>
+          </div>
+        </form>
       </div>
     </div>
   </section>
@@ -131,20 +246,20 @@
   <!-- LOCATION -->
   <section id="location">
     <div class="container">
-      <div class="section-label" data-de="Standort" data-en="Location">Standort</div>
+      <div class="section-label" data-de="Standort" data-en="Location">Location</div>
       <h2 class="section-title">
         <span class="lang-de">Wo wir sind</span>
-        <span class="lang-en" style="display:none;">Where we are</span>
+        <span class="lang-en">Where we are</span>
       </h2>
-      <div class="location-grid">
+      <div class="location-grid anim-fade">
         <div class="location-text">
           <div class="location-pin">📍</div>
           <h3>Choulou, Paphos District</h3>
           <p class="lang-de">Wir befinden uns in Choulou, einem wunderschönen, ruhigen Dorf im Bezirk Paphos, Zypern. Die Natur direkt vor der Haustür – ideal für lange Spaziergänge und entspannte Betreuung.</p>
-          <p class="lang-en" style="display:none;">We're located in Choulou, a beautiful quiet village in the Paphos District, Cyprus. Nature right at our doorstep – perfect for long walks and relaxed care.</p>
+          <p class="lang-en">We're located in Choulou, a beautiful quiet village in the Paphos District, Cyprus. Nature right at our doorstep – perfect for long walks and relaxed care.</p>
           <a href="https://maps.google.com/?q=Choulou,Paphos,Cyprus" target="_blank" class="btn-secondary">
             <span class="lang-de">Auf Google Maps ansehen</span>
-            <span class="lang-en" style="display:none;">View on Google Maps</span>
+            <span class="lang-en">View on Google Maps</span>
           </a>
         </div>
         <div class="location-map">
@@ -160,61 +275,71 @@
   <!-- CONTACT -->
   <section id="contact">
     <div class="container">
-      <div class="section-label" data-de="Kontakt" data-en="Contact">Kontakt</div>
+      <div class="section-label" data-de="Kontakt" data-en="Contact">Contact</div>
       <h2 class="section-title">
         <span class="lang-de">Schreib mir!</span>
-        <span class="lang-en" style="display:none;">Get in touch!</span>
+        <span class="lang-en">Get in touch!</span>
       </h2>
       <div class="contact-grid">
         <div class="contact-info">
-          <div class="contact-item">
+          <div class="contact-item anim-fade">
             <span class="contact-icon">📞</span>
             <div>
-              <p class="contact-label" data-de="Telefon" data-en="Phone">Telefon</p>
+              <p class="contact-label" data-de="Telefon" data-en="Phone">Phone</p>
               <a href="tel:+35794567136" class="contact-value">+357 94 567 136</a>
             </div>
           </div>
-          <div class="contact-item">
+          <div class="contact-item anim-fade">
             <span class="contact-icon">📸</span>
             <div>
               <p class="contact-label">Instagram</p>
-              <a href="https://instagram.com/lindasdoggydaycare" target="_blank" class="contact-value">@lindasdoggydaycare</a>
+              <a href="https://www.instagram.com/lindasdoggydaycare/" target="_blank" class="contact-value">@lindasdoggydaycare</a>
             </div>
           </div>
-          <div class="contact-item">
+          <div class="contact-item anim-fade">
+            <span class="contact-icon">📘</span>
+            <div>
+              <p class="contact-label">Facebook</p>
+              <a href="https://www.facebook.com/share/1E4sTP14za/" target="_blank" class="contact-value">Linda's Doggy Daycare</a>
+            </div>
+          </div>
+          <div class="contact-item anim-fade">
             <span class="contact-icon">📍</span>
             <div>
-              <p class="contact-label" data-de="Standort" data-en="Location">Standort</p>
+              <p class="contact-label" data-de="Standort" data-en="Location">Location</p>
               <span class="contact-value">Choulou, Paphos, Cyprus</span>
             </div>
           </div>
         </div>
-        <form class="contact-form" id="contactForm" onsubmit="submitForm(event)">
+        <form class="contact-form" id="contactForm" onsubmit="submitContact(event)">
           <div class="form-group">
-            <label for="name">
+            <label for="cName">
               <span class="lang-de">Name</span>
-              <span class="lang-en" style="display:none;">Name</span>
+              <span class="lang-en">Name</span>
             </label>
-            <input type="text" id="name" name="name" required placeholder="Dein Name / Your name" />
+            <input type="text" id="cName" name="cName" required
+              placeholder="Your name / Dein Name" />
           </div>
           <div class="form-group">
-            <label for="email">E-Mail</label>
-            <input type="email" id="email" name="email" required placeholder="deine@email.com" />
+            <label for="cEmail">E-Mail</label>
+            <input type="email" id="cEmail" name="cEmail" required
+              placeholder="your@email.com" />
           </div>
           <div class="form-group">
-            <label for="message">
+            <label for="cMessage">
               <span class="lang-de">Nachricht</span>
-              <span class="lang-en" style="display:none;">Message</span>
+              <span class="lang-en">Message</span>
             </label>
-            <textarea id="message" name="message" rows="5" required placeholder="Deine Nachricht / Your message..."></textarea>
+            <textarea id="cMessage" name="cMessage" rows="5" required
+              placeholder="Your message / Deine Nachricht..."></textarea>
           </div>
           <button type="submit" class="btn-primary btn-full">
             <span class="lang-de">Nachricht senden ✉️</span>
-            <span class="lang-en" style="display:none;">Send message ✉️</span>
+            <span class="lang-en">Send message ✉️</span>
           </button>
-          <div class="form-success" id="formSuccess" style="display:none;">
-            <span class="lang-de">✅ Danke! Ich melde mich bald bei dir.</span>
-            <span class="lang-en" style="display:none;">✅ Thank you! I'll get back to you soon.</span>
+          <div class="form-success" id="contactSuccess" style="display:none;">
+            <span class="lang-de">✅ Danke! Ich melde mich bald.</span>
+            <span class="lang-en">✅ Thank you! I'll get back to you soon.</span>
           </div>
         </form>
       </div>
@@ -230,19 +355,26 @@
           <span>Linda's Doggy Daycare</span>
         </div>
         <nav class="footer-nav">
-          <a href="#about" data-de="Über Linda" data-en="About Linda">Über Linda</a>
-          <a href="#services" data-de="Leistungen" data-en="Services">Leistungen</a>
-          <a href="#location" data-de="Standort" data-en="Location">Standort</a>
-          <a href="#contact" data-de="Kontakt" data-en="Contact">Kontakt</a>
+          <a href="#about"    data-de="Über Linda"  data-en="About Linda">About Linda</a>
+          <a href="#gallery"  data-de="Galerie"     data-en="Gallery">Gallery</a>
+          <a href="#services" data-de="Leistungen"  data-en="Services">Services</a>
+          <a href="#reviews"  data-de="Bewertungen" data-en="Reviews">Reviews</a>
+          <a href="#location" data-de="Standort"    data-en="Location">Location</a>
+          <a href="#contact"  data-de="Kontakt"     data-en="Contact">Contact</a>
         </nav>
         <div class="footer-socials">
-          <a href="tel:+35794567136" class="social-link" title="Phone">📞</a>
-          <a href="https://instagram.com/lindasdoggydaycare" target="_blank" class="social-link" title="Instagram">📸</a>
+          <a href="tel:+35794567136" class="social-link" title="Phone" aria-label="Call Linda">📞</a>
+          <a href="https://www.instagram.com/lindasdoggydaycare/" target="_blank" rel="noopener" class="social-link" title="Instagram" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/share/1E4sTP14za/" target="_blank" rel="noopener" class="social-link" title="Facebook" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
         </div>
       </div>
       <div class="footer-bottom">
         <p class="lang-de">© 2025 Linda's Doggy Daycare · Choulou, Paphos, Zypern · Mit ❤️ für Hunde</p>
-        <p class="lang-en" style="display:none;">© 2025 Linda's Doggy Daycare · Choulou, Paphos, Cyprus · Made with ❤️ for dogs</p>
+        <p class="lang-en">© 2025 Linda's Doggy Daycare · Choulou, Paphos, Cyprus · Made with ❤️ for dogs</p>
       </div>
     </div>
   </footer>
