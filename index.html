@@ -105,36 +105,97 @@
         <span class="lang-de">Momente mit unseren Gästen</span>
         <span class="lang-en">Moments with our guests</span>
       </h2>
-      <div class="slider-wrapper">
-        <button class="slider-btn slider-prev" onclick="slideGallery(-1)" aria-label="Previous">&#8249;</button>
-        <div class="slider-viewport" id="galleryViewport">
-          <div class="slider-track" id="galleryTrack">
-            <!-- 18 placeholder slides — replace src with real image URLs -->
-            <div class="slide"><div class="slide-img-placeholder">🐶<span>1</span></div></div>
-            <div class="slide"><div class="slide-img-placeholder">🐕<span>2</span></div></div>
-            <div class="slide"><div class="slide-img-placeholder">🐩<span>3</span></div></div>
-            <div class="slide"><div class="slide-img-placeholder">🦮<span>4</span></div></div>
-            <div class="slide"><div class="slide-img-placeholder">🐶<span>5</span></div></div>
-            <div class="slide"><div class="slide-img-placeholder">🐕<span>6</span></div></div>
-            <div class="slide"><div class="slide-img-placeholder">🐩<span>7</span></div></div>
-            <div class="slide"><div class="slide-img-placeholder">🦮<span>8</span></div></div>
-            <div class="slide"><div class="slide-img-placeholder">🐶<span>9</span></div></div>
-            <div class="slide"><div class="slide-img-placeholder">🐕<span>10</span></div></div>
-            <div class="slide"><div class="slide-img-placeholder">🐩<span>11</span></div></div>
-            <div class="slide"><div class="slide-img-placeholder">🦮<span>12</span></div></div>
-            <div class="slide"><div class="slide-img-placeholder">🐶<span>13</span></div></div>
-            <div class="slide"><div class="slide-img-placeholder">🐕<span>14</span></div></div>
-            <div class="slide"><div class="slide-img-placeholder">🐩<span>15</span></div></div>
-            <div class="slide"><div class="slide-img-placeholder">🦮<span>16</span></div></div>
-            <div class="slide"><div class="slide-img-placeholder">🐶<span>17</span></div></div>
-            <div class="slide"><div class="slide-img-placeholder">🐕<span>18</span></div></div>
-          </div>
-        </div>
-        <button class="slider-btn slider-next" onclick="slideGallery(1)" aria-label="Next">&#8250;</button>
-      </div>
-      <div class="slider-dots" id="sliderDots"></div>
     </div>
+    <!-- Full-width slider (outside container for edge-to-edge feel) -->
+    <div class="slider-outer">
+      <button class="slider-btn slider-prev" id="sliderPrev" aria-label="Previous">&#8249;</button>
+      <div class="slider-viewport" id="galleryViewport">
+        <div class="slider-track" id="galleryTrack">
+
+          <!-- SLIDE 1 -->
+          <div class="slide" onclick="openLightbox(0)">
+            <img src="https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/46fefa1c1_photo_2026-06-04_19-44-32.jpg" alt="" loading="lazy" />
+          </div>
+          <!-- SLIDE 2 -->
+          <div class="slide" onclick="openLightbox(1)">
+            <img src="https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/3130980fd_photo_2026-06-04_19-43-37.jpg" alt="" loading="lazy" />
+          </div>
+          <!-- SLIDE 3 -->
+          <div class="slide" onclick="openLightbox(2)">
+            <img src="https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/97cd72a20_photo_2026-06-04_19-44-03.jpg" alt="" loading="lazy" />
+          </div>
+          <!-- SLIDE 4 -->
+          <div class="slide" onclick="openLightbox(3)">
+            <img src="https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/567213fce_photo_2026-06-04_19-44-08.jpg" alt="" loading="lazy" />
+          </div>
+          <!-- SLIDE 5 -->
+          <div class="slide" onclick="openLightbox(4)">
+            <img src="https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/1825ce20c_photo_2026-06-04_19-44-11.jpg" alt="" loading="lazy" />
+          </div>
+          <!-- SLIDE 6 -->
+          <div class="slide" onclick="openLightbox(5)">
+            <img src="https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/337a2b6ae_photo_2026-06-04_19-44-15.jpg" alt="" loading="lazy" />
+          </div>
+          <!-- SLIDE 7 -->
+          <div class="slide" onclick="openLightbox(6)">
+            <img src="https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/d84b024e3_photo_2026-06-04_19-44-17.jpg" alt="" loading="lazy" />
+          </div>
+          <!-- SLIDE 8 -->
+          <div class="slide" onclick="openLightbox(7)">
+            <img src="https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/8329d02be_photo_2026-06-04_19-44-20.jpg" alt="" loading="lazy" />
+          </div>
+          <!-- SLIDE 9 -->
+          <div class="slide" onclick="openLightbox(8)">
+            <img src="https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/05b4fc47a_photo_2026-06-04_19-44-23.jpg" alt="" loading="lazy" />
+          </div>
+          <!-- SLIDE 10 -->
+          <div class="slide" onclick="openLightbox(9)">
+            <img src="https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/54d90b507_photo_2026-06-04_19-44-27.jpg" alt="" loading="lazy" />
+          </div>
+          <!-- SLIDES 11-18: placeholders — replace src when images are uploaded -->
+          <div class="slide slide-placeholder" onclick="openLightbox(10)">
+            <div class="slide-empty">🐾</div>
+          </div>
+          <div class="slide slide-placeholder" onclick="openLightbox(11)">
+            <div class="slide-empty">🐾</div>
+          </div>
+          <div class="slide slide-placeholder" onclick="openLightbox(12)">
+            <div class="slide-empty">🐾</div>
+          </div>
+          <div class="slide slide-placeholder" onclick="openLightbox(13)">
+            <div class="slide-empty">🐾</div>
+          </div>
+          <div class="slide slide-placeholder" onclick="openLightbox(14)">
+            <div class="slide-empty">🐾</div>
+          </div>
+          <div class="slide slide-placeholder" onclick="openLightbox(15)">
+            <div class="slide-empty">🐾</div>
+          </div>
+          <div class="slide slide-placeholder" onclick="openLightbox(16)">
+            <div class="slide-empty">🐾</div>
+          </div>
+          <div class="slide slide-placeholder" onclick="openLightbox(17)">
+            <div class="slide-empty">🐾</div>
+          </div>
+
+        </div><!-- /slider-track -->
+      </div><!-- /slider-viewport -->
+      <button class="slider-btn slider-next" id="sliderNext" aria-label="Next">&#8250;</button>
+    </div><!-- /slider-outer -->
+    <div class="slider-dots" id="sliderDots"></div>
   </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lb-close" id="lbClose" aria-label="Close">&times;</button>
+    <button class="lb-arrow lb-prev" id="lbPrev" aria-label="Previous image">&#8249;</button>
+    <div class="lb-img-wrap">
+      <img class="lb-img" id="lbImg" src="" alt="" />
+    </div>
+    <button class="lb-arrow lb-next" id="lbNext" aria-label="Next image">&#8250;</button>
+    <div class="lb-counter" id="lbCounter">1 / 10</div>
+  </div>
+  <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()"></div>
 
   <!-- SERVICES -->
   <section id="services">
@@ -183,17 +244,11 @@
         <span class="lang-de">Was andere sagen</span>
         <span class="lang-en">What others say</span>
       </h2>
-
-      <!-- Published reviews list -->
-      <div class="reviews-list" id="reviewsList">
-        <!-- populated by JS from localStorage -->
-      </div>
+      <div class="reviews-list" id="reviewsList"></div>
       <p class="no-reviews-msg" id="noReviewsMsg" style="display:none;">
         <span class="lang-de">Noch keine Bewertungen. Sei der Erste! 🐾</span>
         <span class="lang-en">No reviews yet. Be the first! 🐾</span>
       </p>
-
-      <!-- Review form -->
       <div class="review-form-wrap">
         <h3 class="review-form-title">
           <span class="lang-de">Bewertung hinterlassen</span>
@@ -201,18 +256,11 @@
         </h3>
         <form class="review-form" id="reviewForm" onsubmit="submitReview(event)">
           <div class="form-group">
-            <label for="rName">
-              <span class="lang-de">Name</span>
-              <span class="lang-en">Name</span>
-            </label>
-            <input type="text" id="rName" name="rName" required
-              placeholder="Your name / Dein Name" />
+            <label for="rName"><span class="lang-de">Name</span><span class="lang-en">Name</span></label>
+            <input type="text" id="rName" name="rName" required placeholder="Your name / Dein Name" />
           </div>
           <div class="form-group">
-            <label>
-              <span class="lang-de">Bewertung</span>
-              <span class="lang-en">Rating</span>
-            </label>
+            <label><span class="lang-de">Bewertung</span><span class="lang-en">Rating</span></label>
             <div class="star-input" id="starInput">
               <button type="button" class="star" data-val="1" onclick="setStars(1)">★</button>
               <button type="button" class="star" data-val="2" onclick="setStars(2)">★</button>
@@ -220,15 +268,11 @@
               <button type="button" class="star" data-val="4" onclick="setStars(4)">★</button>
               <button type="button" class="star" data-val="5" onclick="setStars(5)">★</button>
             </div>
-            <input type="hidden" id="rStars" name="rStars" value="0" required />
+            <input type="hidden" id="rStars" name="rStars" value="0" />
           </div>
           <div class="form-group">
-            <label for="rText">
-              <span class="lang-de">Nachricht</span>
-              <span class="lang-en">Message</span>
-            </label>
-            <textarea id="rText" name="rText" rows="4" required
-              placeholder="Your experience... / Deine Erfahrung..."></textarea>
+            <label for="rText"><span class="lang-de">Nachricht</span><span class="lang-en">Message</span></label>
+            <textarea id="rText" name="rText" rows="4" required placeholder="Your experience... / Deine Erfahrung..."></textarea>
           </div>
           <button type="submit" class="btn-primary btn-full">
             <span class="lang-de">Bewertung absenden ⭐</span>
@@ -263,10 +307,8 @@
           </a>
         </div>
         <div class="location-map">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3277.0!2d32.5!3d34.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14e706b6d9fec9a7%3A0x6a5b5e2a6e5b5e2a!2sChoulou%2C+Cyprus!5e0!3m2!1sen!2s!4v1609459200000!5m2!1sen!2s"
-            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
-            title="Choulou, Paphos, Cyprus"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3277.0!2d32.5!3d34.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14e706b6d9fec9a7%3A0x6a5b5e2a6e5b5e2a!2sChoulou%2C+Cyprus!5e0!3m2!1sen!2s!4v1609459200000!5m2!1sen!2s"
+            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" title="Choulou, Paphos, Cyprus"></iframe>
         </div>
       </div>
     </div>
@@ -313,25 +355,16 @@
         </div>
         <form class="contact-form" id="contactForm" onsubmit="submitContact(event)">
           <div class="form-group">
-            <label for="cName">
-              <span class="lang-de">Name</span>
-              <span class="lang-en">Name</span>
-            </label>
-            <input type="text" id="cName" name="cName" required
-              placeholder="Your name / Dein Name" />
+            <label for="cName"><span class="lang-de">Name</span><span class="lang-en">Name</span></label>
+            <input type="text" id="cName" name="cName" required placeholder="Your name / Dein Name" />
           </div>
           <div class="form-group">
             <label for="cEmail">E-Mail</label>
-            <input type="email" id="cEmail" name="cEmail" required
-              placeholder="your@email.com" />
+            <input type="email" id="cEmail" name="cEmail" required placeholder="your@email.com" />
           </div>
           <div class="form-group">
-            <label for="cMessage">
-              <span class="lang-de">Nachricht</span>
-              <span class="lang-en">Message</span>
-            </label>
-            <textarea id="cMessage" name="cMessage" rows="5" required
-              placeholder="Your message / Deine Nachricht..."></textarea>
+            <label for="cMessage"><span class="lang-de">Nachricht</span><span class="lang-en">Message</span></label>
+            <textarea id="cMessage" name="cMessage" rows="5" required placeholder="Your message / Deine Nachricht..."></textarea>
           </div>
           <button type="submit" class="btn-primary btn-full">
             <span class="lang-de">Nachricht senden ✉️</span>
