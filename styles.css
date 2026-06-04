@@ -86,10 +86,41 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
 ============================================ */
 #hero {
   position: relative; min-height: 100svh; display: flex; align-items: center;
-  background: linear-gradient(160deg,rgba(60,90,95,0.7),rgba(141,164,170,0.35) 55%,rgba(90,120,125,0.8));
+  background-color: var(--bg);
   padding: 5.5rem 0 4rem; overflow: hidden;
 }
-#hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at 65% 50%,rgba(180,210,215,0.18),transparent 68%); pointer-events:none; }
+
+/* Logo background — fills entire hero, blends softly */
+#hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/7067a4e51_2222.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  mix-blend-mode: soft-light;
+  opacity: 0.38;
+  pointer-events: none;
+  /* Soft vignette edge fade */
+  -webkit-mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 40%, transparent 100%);
+  z-index: 0;
+}
+
+/* Colour gradient overlay — keeps text readable */
+#hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(160deg,
+      rgba(45,75,80,0.72) 0%,
+      rgba(141,164,170,0.30) 50%,
+      rgba(80,110,115,0.75) 100%),
+    radial-gradient(ellipse at 65% 50%, rgba(180,210,215,0.15), transparent 68%);
+  pointer-events: none;
+  z-index: 0;
+}
 .hero-content { position:relative; z-index:1; width:100%; max-width:720px; margin:0 auto; padding:0 1.25rem; text-align:center; }
 .hero-pre { font-weight:700; font-size:0.76rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent-light); margin-bottom:0.45rem; }
 .hero-title  { text-shadow:0 2px 20px rgba(0,0,0,0.28); margin-bottom:0.65rem; }
