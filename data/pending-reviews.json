@@ -38,5 +38,13 @@
     "text": "Testnachricht",
     "date": "5.6.2026",
     "publishUrl": "https://lindasdoggydaycare.com/api/publish-review?id=mq187gy63re12"
+  },
+  {
+    "id": "test-abc123",
+    "name": "Test Reviewer",
+    "stars": 5,
+    "text": "Dies ist ein automatischer Test. Bitte ignorieren.",
+    "date": "5.6.2026",
+    "publishUrl": "https://lindasdoggydaycare.com/api/publish-review?id=test-abc123"
   }
 ]
