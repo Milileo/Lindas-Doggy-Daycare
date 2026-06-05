@@ -262,24 +262,145 @@ function setStars(val) {
 }
 
 // ============================================================
-// REVIEWS — API-backed (Vercel functions)
+// REVIEWS — EmailJS + Vercel Functions + GitHub JSON
 // ============================================================
+
+// ---- EmailJS Configuration ----
+// REPLACE the two placeholders below with your actual values from emailjs.com
+// Dashboard → Account → API Keys → Public Key
+// Dashboard → Email Templates → Template ID
+const EMAILJS_PUBLIC_KEY  = 'YOUR_EMAILJS_PUBLIC_KEY';   // ← Replace this
+const EMAILJS_SERVICE_ID  = 'service_1539ux8';            // ← Already set
+const EMAILJS_TEMPLATE_ID = 'YOUR_EMAILJS_TEMPLATE_ID';  // ← Replace this
+
+// ---- Init EmailJS once DOM is ready ----
+function initEmailJS() {
+  if (typeof emailjs === 'undefined') {
+    console.warn('[EmailJS] Library not loaded — email notifications disabled');
+    return;
+  }
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  console.log('[EmailJS] Initialized ✓');
+}
+
+// ---- Utility ----
 function starsHTML(n)  { return '★'.repeat(n) + '☆'.repeat(5 - n); }
 function escHtml(s)    { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function generateId()  { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
 
-// ---- Slider state for reviews ----
+// ============================================================
+// REVIEW FORM — Submit
+// ============================================================
+async function submitReview(e) {
+  e.preventDefault();
+
+  // Validate star selection
+  if (selectedStars === 0) {
+    alert(currentLang === 'de' ? 'Bitte wähle eine Bewertung (1–5 Sterne).' : 'Please select a rating (1–5 stars).');
+    return;
+  }
+
+  const name  = document.getElementById('rName').value.trim();
+  const text  = document.getElementById('rText').value.trim();
+  const stars = selectedStars;
+
+  if (!name || !text) {
+    alert(currentLang === 'de' ? 'Bitte fülle alle Felder aus.' : 'Please fill in all fields.');
+    return;
+  }
+
+  // Disable submit button while processing
+  const submitBtn = document.querySelector('#reviewForm button[type="submit"]');
+  if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = currentLang === 'de' ? 'Wird gesendet…' : 'Sending…'; }
+
+  // Generate unique review ID
+  const reviewId   = generateId();
+  const publishUrl = `https://lindas-doggy-daycare.vercel.app/api/publish-review?id=${reviewId}`;
+
+  try {
+    // ---- Step 1: Save to pending-reviews.json via Vercel Function ----
+    const saveRes = await fetch('/api/save-review', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ id: reviewId, name, stars, text }),
+    });
+
+    if (!saveRes.ok) {
+      const errData = await saveRes.json().catch(() => ({}));
+      throw new Error(errData.error || `save-review returned ${saveRes.status}`);
+    }
+
+    console.log('[submitReview] Review saved to pending ✓', reviewId);
+
+    // ---- Step 2: Send email notification via EmailJS ----
+    const starsLabel = '★'.repeat(stars) + '☆'.repeat(5 - stars);
+    let emailSent = false;
+
+    if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY' && EMAILJS_TEMPLATE_ID !== 'YOUR_EMAILJS_TEMPLATE_ID') {
+      try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+          reviewer_name: name,
+          stars:         starsLabel,
+          stars_count:   stars,
+          message:       text,
+          publish_url:   publishUrl,
+          date:          new Date().toLocaleDateString('de-DE'),
+        });
+        emailSent = true;
+        console.log('[EmailJS] Notification sent ✓');
+      } catch (emailErr) {
+        // Email failed — review is already saved, not critical
+        console.warn('[EmailJS] Send failed:', emailErr);
+      }
+    } else {
+      console.warn('[submitReview] EmailJS not configured — skipping notification email');
+    }
+
+    // ---- Step 3: Show success message ----
+    const sEl = document.getElementById('reviewSuccess');
+    if (sEl) {
+      sEl.style.display = '';
+      setTimeout(() => { sEl.style.display = 'none'; }, 8000);
+    }
+
+    // Reset form
+    document.getElementById('reviewForm').reset();
+    setStars(0);
+
+    if (!emailSent) {
+      console.info('[submitReview] Review saved but email not sent — check EmailJS keys');
+    }
+
+  } catch (err) {
+    console.error('[submitReview] Error:', err);
+    const msg = currentLang === 'de'
+      ? `Fehler beim Senden der Bewertung. Bitte versuche es erneut.\n(${err.message})`
+      : `Error submitting review. Please try again.\n(${err.message})`;
+    alert(msg);
+  } finally {
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = currentLang === 'de' ? 'Bewertung senden' : 'Submit review'; }
+  }
+}
+
+// ============================================================
+// REVIEW SLIDER — load from /api/get-reviews
+// ============================================================
 let rvSliderIndex = 0;
+let rvTotalReviews = 0;
 
 function getRvVisibleCount() {
   return window.innerWidth >= 900 ? 4.5 : 1.45;
 }
+
 function getRvSlideWidth() {
   const s = document.querySelector('#reviewsTrack .rv-slide');
   return s ? s.offsetWidth : 0;
 }
+
 function rvMaxIndex(total) {
   return Math.max(0, total - Math.floor(getRvVisibleCount()));
 }
+
 function goToRvSlide(idx, total) {
   rvSliderIndex = Math.max(0, Math.min(idx, rvMaxIndex(total)));
   const track = document.getElementById('reviewsTrack');
@@ -289,10 +410,12 @@ function goToRvSlide(idx, total) {
   }
   updateRvDots(total);
 }
+
 function updateRvDots(total) {
   document.querySelectorAll('.rv-dot').forEach((d, i) =>
     d.classList.toggle('active', i === rvSliderIndex));
 }
+
 function buildRvDots(total) {
   const container = document.getElementById('reviewsDots');
   if (!container) return;
@@ -300,11 +423,37 @@ function buildRvDots(total) {
   const pages = rvMaxIndex(total) + 1;
   for (let i = 0; i < pages; i++) {
     const btn = document.createElement('button');
-    btn.className = 'slider-dot rv-dot' + (i === 0 ? ' active' : '');
-    btn.setAttribute('aria-label', `Go to review ${i + 1}`);
+    btn.className   = 'slider-dot rv-dot' + (i === 0 ? ' active' : '');
+    btn.setAttribute('aria-label', `Review ${i + 1}`);
     btn.addEventListener('click', () => goToRvSlide(i, total));
     container.appendChild(btn);
   }
+}
+
+function initRvDrag(total) {
+  const viewport = document.querySelector('.rv-viewport');
+  const track    = document.getElementById('reviewsTrack');
+  if (!viewport || !track) return;
+
+  let isDragging = false, dragStartX = 0, dragDelta = 0;
+
+  const startDrag = x => { isDragging = true; dragStartX = x; dragDelta = 0; track.style.transition = 'none'; };
+  const moveDrag  = x => { if (!isDragging) return; dragDelta = x - dragStartX; track.style.transform = `translateX(${-rvSliderIndex * getRvSlideWidth() + dragDelta}px)`; };
+  const endDrag   = ()  => {
+    if (!isDragging) return;
+    isDragging = false;
+    if      (dragDelta < -60) goToRvSlide(rvSliderIndex + 1, total);
+    else if (dragDelta >  60) goToRvSlide(rvSliderIndex - 1, total);
+    else                       goToRvSlide(rvSliderIndex,     total);
+  };
+
+  viewport.addEventListener('mousedown',  e => startDrag(e.clientX));
+  viewport.addEventListener('mousemove',  e => { if (isDragging) moveDrag(e.clientX); });
+  viewport.addEventListener('mouseup',    endDrag);
+  viewport.addEventListener('mouseleave', endDrag);
+  viewport.addEventListener('touchstart', e => startDrag(e.touches[0].clientX), { passive: true });
+  viewport.addEventListener('touchmove',  e => moveDrag(e.touches[0].clientX),  { passive: true });
+  viewport.addEventListener('touchend',   endDrag);
 }
 
 function renderReviews(reviews) {
@@ -314,12 +463,13 @@ function renderReviews(reviews) {
 
   if (!reviews || reviews.length === 0) {
     list.innerHTML = '';
-    noMsg && (noMsg.style.display = '');
+    if (noMsg) noMsg.style.display = '';
     return;
   }
-  noMsg && (noMsg.style.display = 'none');
 
-  // Build slider HTML
+  if (noMsg) noMsg.style.display = 'none';
+  rvTotalReviews = reviews.length;
+
   const slidesHtml = reviews.map(r => `
     <div class="rv-slide">
       <div class="review-card">
@@ -342,7 +492,7 @@ function renderReviews(reviews) {
     </div>
     <div class="slider-dots" id="reviewsDots"></div>`;
 
-  // Init dots + drag after DOM insertion
+  // Init slider interactions after DOM is painted
   setTimeout(() => {
     buildRvDots(reviews.length);
     initRvDrag(reviews.length);
@@ -353,25 +503,6 @@ function renderReviews(reviews) {
   }, 50);
 }
 
-function initRvDrag(total) {
-  const viewport = document.querySelector('.rv-viewport');
-  const track    = document.getElementById('reviewsTrack');
-  if (!viewport || !track) return;
-  let isDragging = false, dragStartX = 0, dragDelta = 0;
-
-  const startDrag = x => { isDragging = true; dragStartX = x; dragDelta = 0; track.style.transition = 'none'; };
-  const moveDrag  = x => { if (!isDragging) return; dragDelta = x - dragStartX; track.style.transform = `translateX(${-rvSliderIndex * getRvSlideWidth() + dragDelta}px)`; };
-  const endDrag   = () => { if (!isDragging) return; isDragging = false; if (dragDelta < -60) goToRvSlide(rvSliderIndex + 1, total); else if (dragDelta > 60) goToRvSlide(rvSliderIndex - 1, total); else goToRvSlide(rvSliderIndex, total); };
-
-  viewport.addEventListener('mousedown',  e => startDrag(e.clientX));
-  viewport.addEventListener('mousemove',  e => { if (isDragging) moveDrag(e.clientX); });
-  viewport.addEventListener('mouseup',    endDrag);
-  viewport.addEventListener('mouseleave', endDrag);
-  viewport.addEventListener('touchstart', e => startDrag(e.touches[0].clientX), { passive: true });
-  viewport.addEventListener('touchmove',  e => moveDrag(e.touches[0].clientX),  { passive: true });
-  viewport.addEventListener('touchend',   endDrag);
-}
-
 async function loadReviews() {
   try {
     const res = await fetch('/api/get-reviews');
@@ -379,45 +510,12 @@ async function loadReviews() {
       const reviews = await res.json();
       renderReviews(reviews);
     } else {
+      console.warn('[loadReviews] get-reviews returned', res.status);
       renderReviews([]);
     }
   } catch (e) {
+    console.error('[loadReviews] Network error:', e.message);
     renderReviews([]);
-  }
-}
-
-async function submitReview(e) {
-  e.preventDefault();
-  if (selectedStars === 0) {
-    alert(currentLang === 'de' ? 'Bitte wähle eine Bewertung.' : 'Please select a rating.');
-    return;
-  }
-  const name  = document.getElementById('rName').value.trim();
-  const text  = document.getElementById('rText').value.trim();
-  const stars = selectedStars;
-
-  const btn = e.target.querySelector('button[type="submit"]');
-  if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; }
-
-  try {
-    const res = await fetch('/api/submit-review', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, stars, text }),
-    });
-
-    if (res.ok) {
-      const sEl = document.getElementById('reviewSuccess');
-      if (sEl) { sEl.style.display = ''; setTimeout(() => sEl.style.display = 'none', 7000); }
-      document.getElementById('reviewForm').reset();
-      setStars(0);
-    } else {
-      alert(currentLang === 'de' ? 'Fehler beim Senden. Bitte versuche es erneut.' : 'Error submitting. Please try again.');
-    }
-  } catch (err) {
-    alert(currentLang === 'de' ? 'Netzwerkfehler. Bitte versuche es erneut.' : 'Network error. Please try again.');
-  } finally {
-    if (btn) { btn.disabled = false; btn.style.opacity = ''; }
   }
 }
 
