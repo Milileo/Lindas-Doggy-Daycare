@@ -106,25 +106,23 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
   z-index: 0;
 }
 
-/* Decorative comic-dog logo — top right of hero, no effects */
-.hero-logo-deco {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  max-height: 100%;
-  width: auto;
-  max-width: 42%;
-  object-fit: contain;
-  object-position: right top;
-  z-index: 0;
-  pointer-events: none;
+
+
+
+/* Comic dog image — above eyebrow text in hero, normal flow */
+.hero-dogs {
   display: block;
+  margin: 0 auto 0.6rem;
+  width: clamp(120px, 22vw, 220px); /* ~50% of original, roughly as wide as eyebrow text */
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
 }
 @media (max-width: 620px) {
-  .hero-logo-deco {
-    max-width: 55%;
-    opacity: 0.55;
+  .hero-dogs {
+    width: clamp(100px, 38vw, 160px);
+    margin-bottom: 0.4rem;
   }
 }
 
