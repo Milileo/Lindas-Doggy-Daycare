@@ -269,9 +269,9 @@ function setStars(val) {
 // REPLACE the two placeholders below with your actual values from emailjs.com
 // Dashboard → Account → API Keys → Public Key
 // Dashboard → Email Templates → Template ID
-const EMAILJS_PUBLIC_KEY  = 'YOUR_EMAILJS_PUBLIC_KEY';   // ← Replace this
+const EMAILJS_PUBLIC_KEY  = 'LuDSHg4BJcWmmZ4WP';   // ← Replace this
 const EMAILJS_SERVICE_ID  = 'service_1539ux8';            // ← Already set
-const EMAILJS_TEMPLATE_ID = 'YOUR_EMAILJS_TEMPLATE_ID';  // ← Replace this
+const EMAILJS_TEMPLATE_ID = 'template_nofngog';  // ← Replace this
 
 // ---- Init EmailJS once DOM is ready ----
 function initEmailJS() {
@@ -336,7 +336,7 @@ async function submitReview(e) {
     const starsLabel = '★'.repeat(stars) + '☆'.repeat(5 - stars);
     let emailSent = false;
 
-    if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY' && EMAILJS_TEMPLATE_ID !== 'YOUR_EMAILJS_TEMPLATE_ID') {
+    if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== 'LuDSHg4BJcWmmZ4WP' && EMAILJS_TEMPLATE_ID !== 'template_nofngog') {
       try {
         await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
           reviewer_name: name,
