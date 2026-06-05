@@ -336,7 +336,7 @@ async function submitReview(e) {
     const starsLabel = '★'.repeat(stars) + '☆'.repeat(5 - stars);
     let emailSent = false;
 
-    if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== 'LuDSHg4BJcWmmZ4WP' && EMAILJS_TEMPLATE_ID !== 'template_nofngog') {
+    if (typeof emailjs !== 'undefined') {
       try {
         await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
           reviewer_name: name,
