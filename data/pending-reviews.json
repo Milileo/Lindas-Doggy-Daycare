@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "id": "test-1780667853",
+    "name": "Test Linda",
+    "stars": 5,
+    "text": "Wunderbares Erlebnis!",
+    "date": "5.6.2026",
+    "publishUrl": "https://lindasdoggydaycare.com/api/publish-review?id=test-1780667853"
+  }
+]
