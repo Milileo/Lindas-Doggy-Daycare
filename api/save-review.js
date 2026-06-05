@@ -15,11 +15,10 @@ module.exports = async function handler(req, res) {
   const BRANCH       = 'main';
   const FILE_PATH    = 'data/pending-reviews.json';
   const BASE_URL     = 'https://lindasdoggydaycare.com';
-  const NOTIFY_EMAIL = 'mili6limi@gmail.com'; // Linda's email
+  const NOTIFY_EMAIL = 'mili6limi@gmail.com';
 
   if (!GH_TOKEN) {
-    console.error('[save-review] GH_TOKEN missing');
-    return res.status(500).json({ error: 'Server configuration error: GH_TOKEN missing' });
+    return res.status(500).json({ error: 'GH_TOKEN missing' });
   }
 
   let name, stars, text, reviewId;
@@ -39,9 +38,9 @@ module.exports = async function handler(req, res) {
 
   const date = new Date().toLocaleDateString('de-DE');
   const publishUrl = `${BASE_URL}/api/publish-review?id=${reviewId}`;
-  const starsText = '★'.repeat(stars) + '☆'.repeat(5 - stars);
+  const starsText = '\u2605'.repeat(stars) + '\u2606'.repeat(5 - stars);
 
-  // ── 1. Read current pending-reviews.json ────────────────────────────────────
+  // 1. Read current pending-reviews.json
   let pending = [];
   let currentSHA = '';
   try {
@@ -59,11 +58,11 @@ module.exports = async function handler(req, res) {
     console.error('[save-review] Read error:', e.message);
   }
 
-  // ── 2. Append new review ────────────────────────────────────────────────────
+  // 2. Append new review
   const newReview = { id: reviewId, name, stars, text, date, publishUrl };
   pending.push(newReview);
 
-  // ── 3. Write to GitHub ──────────────────────────────────────────────────────
+  // 3. Write to GitHub
   const putBody = {
     message: `feat: new pending review from ${name}`,
     content: Buffer.from(JSON.stringify(pending, null, 2)).toString('base64'),
@@ -82,11 +81,10 @@ module.exports = async function handler(req, res) {
 
   if (!writeRes.ok) {
     const err = await writeRes.json().catch(() => ({}));
-    console.error('[save-review] GitHub write error:', JSON.stringify(err));
-    return res.status(500).json({ error: 'Could not save review to GitHub', detail: err.message || '' });
+    return res.status(500).json({ error: 'Could not save review', detail: err.message || '' });
   }
 
-  // ── 4. Send email via Resend ────────────────────────────────────────────────
+  // 4. Send email via Resend
   if (RESEND_KEY) {
     try {
       const emailRes = await fetch('https://api.resend.com/emails', {
@@ -96,31 +94,30 @@ module.exports = async function handler(req, res) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: "Linda's Doggy Daycare <onboarding@resend.dev>",
+          from: "Lindas Doggy Daycare <onboarding@resend.dev>",
           to: [NOTIFY_EMAIL],
-          subject: `⭐ Neue Bewertung von ${name} (${stars}/5)`,
+          subject: `\u2B50 Neue Bewertung von ${name} (${stars}/5 Sterne)`,
           html: `
             <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;background:#fff8f0;border-radius:12px;">
-              <h2 style="color:#b5651d;margin-top:0;">🐾 Neue Bewertung eingegangen</h2>
+              <h2 style="color:#b5651d;margin-top:0;">\uD83D\uDC3E Neue Kundenbewertung</h2>
               <table style="width:100%;border-collapse:collapse;">
-                <tr><td style="padding:8px 0;font-weight:bold;color:#555;width:120px;">Name:</td><td style="padding:8px 0;">${name}</td></tr>
-                <tr><td style="padding:8px 0;font-weight:bold;color:#555;">Bewertung:</td><td style="padding:8px 0;color:#f0a500;font-size:20px;">${starsText} (${stars}/5)</td></tr>
-                <tr><td style="padding:8px 0;font-weight:bold;color:#555;">Datum:</td><td style="padding:8px 0;">${date}</td></tr>
+                <tr><td style="padding:8px 0;font-weight:bold;color:#555;width:120px;">Name:</td><td>${name}</td></tr>
+                <tr><td style="padding:8px 0;font-weight:bold;color:#555;">Bewertung:</td><td style="color:#f0a500;font-size:20px;">${starsText} (${stars}/5)</td></tr>
+                <tr><td style="padding:8px 0;font-weight:bold;color:#555;">Datum:</td><td>${date}</td></tr>
               </table>
               <div style="background:#fff;border-left:4px solid #b5651d;padding:16px;margin:16px 0;border-radius:4px;">
                 <p style="margin:0;color:#333;font-style:italic;">"${text}"</p>
               </div>
               <a href="${publishUrl}" style="display:inline-block;background:#b5651d;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;margin-top:8px;">
-                ✅ Bewertung veröffentlichen
+                \u2705 Bewertung ver\u00F6ffentlichen
               </a>
-              <p style="color:#999;font-size:12px;margin-top:24px;">Linda's Doggy Daycare — automatische Benachrichtigung</p>
+              <p style="color:#999;font-size:12px;margin-top:24px;">Linda's Doggy Daycare \u2014 automatische Benachrichtigung</p>
             </div>
           `
         })
       });
-
       if (emailRes.ok) {
-        console.log('[save-review] ✅ Email sent via Resend to', NOTIFY_EMAIL);
+        console.log('[save-review] \u2705 Email sent via Resend to', NOTIFY_EMAIL);
       } else {
         const errText = await emailRes.text();
         console.warn('[save-review] Resend warning:', errText);
@@ -132,6 +129,5 @@ module.exports = async function handler(req, res) {
     console.warn('[save-review] RESEND_API_KEY not set — email skipped');
   }
 
-  console.log(`[save-review] Review ${reviewId} saved for "${name}"`);
   return res.status(200).json({ success: true, id: reviewId, publishUrl });
 };
