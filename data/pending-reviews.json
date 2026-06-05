@@ -22,5 +22,13 @@
     "text": "asdasd",
     "date": "5.6.2026",
     "publishUrl": "https://lindasdoggydaycare.com/api/publish-review?id=mq12w2wcdi71x"
+  },
+  {
+    "id": "mq1876cr4bkk7",
+    "name": "Test Kunde",
+    "stars": 5,
+    "text": "Testnachricht",
+    "date": "5.6.2026",
+    "publishUrl": "https://lindasdoggydaycare.com/api/publish-review?id=mq1876cr4bkk7"
   }
 ]
