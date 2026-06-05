@@ -520,20 +520,7 @@ async function loadReviews() {
 }
 
 // ============================================================
-// CONTACT FORM
 // ============================================================
-function submitContact(e) {
-  e.preventDefault();
-  const name    = document.getElementById('cName').value.trim();
-  const email   = document.getElementById('cEmail').value.trim();
-  const message = document.getElementById('cMessage').value.trim();
-  const subject = encodeURIComponent(`[Linda's Doggy Daycare] Message from ${name}`);
-  const body    = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-  window.location.href = `mailto:l.m@hotmail.ch?subject=${subject}&body=${body}`;
-  const sEl = document.getElementById('contactSuccess');
-  if (sEl) { sEl.style.display = ''; setTimeout(() => sEl.style.display = 'none', 5000); }
-  document.getElementById('contactForm').reset();
-}
 
 // ============================================================
 // SMOOTH SCROLL
