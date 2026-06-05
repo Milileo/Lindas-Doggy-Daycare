@@ -371,6 +371,50 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
 .form-group input:focus, .form-group textarea:focus { border-color:rgba(255,255,255,0.58); background:rgba(255,255,255,0.14); }
 .form-success { margin-top:0.9rem; padding:0.82rem 1rem; background:rgba(255,255,255,0.14); border-radius:var(--radius-sm); font-weight:700; font-size:0.88rem; text-align:center; color:var(--white); }
 
+
+/* ============================================
+   REVIEW SLIDER
+============================================ */
+.reviews-slider-outer {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  width: 100%;
+  padding: 0 0.5rem;
+  margin-top: 1.75rem;
+}
+.rv-viewport {
+  flex: 1;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+}
+.rv-viewport:active { cursor: grabbing; }
+
+/* Mobile: 1 full + 0.45 peek */
+.rv-slide {
+  flex: 0 0 calc(100% / 1.45);
+  min-width: calc(100% / 1.45);
+  padding: 0 0.35rem;
+}
+
+@media (min-width: 900px) {
+  /* Desktop: 4 full + 0.5 peek */
+  .rv-slide {
+    flex: 0 0 calc(100% / 4.5);
+    min-width: calc(100% / 4.5);
+  }
+}
+
+.rv-slide .review-card {
+  height: 100%;
+  margin: 0;
+}
+
+.rv-prev { margin-right: 0.4rem; }
+.rv-next { margin-left:  0.4rem; }
+
 /* ============================================
    FOOTER
 ============================================ */
