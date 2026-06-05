@@ -450,3 +450,56 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
   .lb-prev { left: 2rem; }
   .lb-next { right: 2rem; }
 }
+
+/* ============================================
+   CONTACT BAR
+   ============================================ */
+.contact-bar {
+  max-width: 900px;
+  margin: 0 auto 0 auto;
+  padding: 2rem 1.25rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(142,165,171,0.4);
+  border-bottom: 1px solid rgba(142,165,171,0.4);
+}
+
+.cb-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--card-bg, rgba(255,255,255,0.08));
+  border: 1px solid var(--card-border, rgba(255,255,255,0.12));
+  color: var(--white, #fff);
+  padding: 0.65rem 1.2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+  transition: background 0.2s, border-color 0.2s;
+  backdrop-filter: blur(6px);
+}
+
+.cb-item:hover {
+  background: rgba(255,255,255,0.16);
+  border-color: rgba(255,255,255,0.3);
+  color: #fff;
+}
+
+.cb-item span {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+@media (max-width: 480px) {
+  .contact-bar {
+    gap: 0.75rem;
+    padding: 1.5rem 1rem;
+  }
+  .cb-item {
+    font-size: 0.85rem;
+    padding: 0.55rem 1rem;
+  }
+}
