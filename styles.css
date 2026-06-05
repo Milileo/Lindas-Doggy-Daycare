@@ -109,20 +109,23 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
 
 
 
-/* Comic dog image — above eyebrow text in hero, normal flow */
-.hero-dogs {
+
+
+/* Comic dogs — above eyebrow in hero, normal document flow */
+.hero-dogs-top {
   display: block;
-  margin: 0 auto 0.6rem;
-  width: clamp(120px, 22vw, 220px); /* ~50% of original, roughly as wide as eyebrow text */
+  width: 100%;
+  max-width: 420px;
   height: auto;
+  margin: 0 auto 1rem auto;
   object-fit: contain;
   pointer-events: none;
   user-select: none;
 }
-@media (max-width: 620px) {
-  .hero-dogs {
-    width: clamp(100px, 38vw, 160px);
-    margin-bottom: 0.4rem;
+@media (max-width: 768px) {
+  .hero-dogs-top {
+    max-width: 300px;
+    margin-bottom: 0.75rem;
   }
 }
 
