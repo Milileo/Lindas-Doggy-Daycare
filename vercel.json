@@ -1,12 +1,39 @@
 {
   "version": 2,
   "functions": {
-    "api/save-review.js":    { "runtime": "nodejs20.x" },
-    "api/publish-review.js": { "runtime": "nodejs20.x" },
-    "api/get-reviews.js":    { "runtime": "nodejs20.x" }
+    "api/save-review.js": {
+      "runtime": "nodejs20.x"
+    },
+    "api/publish-review.js": {
+      "runtime": "nodejs20.x"
+    },
+    "api/get-reviews.js": {
+      "runtime": "nodejs20.x"
+    }
   },
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/(.*)",     "dest": "/$1"     }
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        },
+        {
+          "key": "Pragma",
+          "value": "no-cache"
+        }
+      ]
+    }
   ]
 }
