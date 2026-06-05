@@ -115,7 +115,7 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
 .hero-dogs-top {
   display: block;
   width: 100%;
-  max-width: 420px;
+  max-width: 280px;
   height: auto;
   margin: 0 auto 1rem auto;
   object-fit: contain;
@@ -124,7 +124,7 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
 }
 @media (max-width: 768px) {
   .hero-dogs-top {
-    max-width: 300px;
+    max-width: 200px;
     margin-bottom: 0.75rem;
   }
 }
