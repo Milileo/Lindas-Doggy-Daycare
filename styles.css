@@ -90,8 +90,6 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
   padding: 5.5rem 0 4rem; overflow: hidden;
 }
 
-
-
 /* Colour gradient overlay — keeps text readable */
 #hero::before {
   content: '';
@@ -105,11 +103,6 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
   pointer-events: none;
   z-index: 0;
 }
-
-
-
-
-
 
 /* Comic dogs — above eyebrow in hero, normal document flow */
 .hero-dogs-top {
@@ -353,25 +346,12 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
 .location-map { border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); border:1px solid var(--card-border); }
 .location-map iframe { display:block; filter:saturate(0.8) brightness(0.95); }
 
-/* ============================================
-   CONTACT
-============================================ */
-.contact-grid { display:flex; flex-direction:column; gap:2.25rem; margin-top:1.75rem; }
-.contact-info  { display:flex; flex-direction:column; gap:1.1rem; }
-.contact-item  { display:flex; align-items:flex-start; gap:0.9rem; background:var(--card-bg); border:1px solid var(--card-border); border-radius:var(--radius-sm); padding:0.95rem 1.2rem; backdrop-filter:blur(6px); }
-.contact-icon  { font-size:1.5rem; flex-shrink:0; }
-.contact-label { font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent-light); margin-bottom:0.15rem; }
-.contact-value { font-weight:700; font-size:0.92rem; color:var(--white); transition:color 0.2s; }
-.contact-value:hover { color:var(--accent-light); }
-
-.contact-form { background:var(--card-bg); border:1px solid var(--card-border); border-radius:var(--radius); padding:1.65rem 1.4rem; backdrop-filter:blur(8px); }
 .form-group { margin-bottom:1rem; }
 .form-group label { display:block; font-weight:700; font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent-light); margin-bottom:0.35rem; }
 .form-group input, .form-group textarea { width:100%; background:rgba(255,255,255,0.1); border:1.5px solid rgba(255,255,255,0.25); border-radius:var(--radius-sm); padding:0.78rem 0.95rem; font-family:'Montserrat',sans-serif; font-size:0.88rem; color:var(--white); outline:none; resize:vertical; transition:border-color 0.2s, background 0.2s; }
 .form-group input::placeholder, .form-group textarea::placeholder { color:rgba(255,255,255,0.38); }
 .form-group input:focus, .form-group textarea:focus { border-color:rgba(255,255,255,0.58); background:rgba(255,255,255,0.14); }
 .form-success { margin-top:0.9rem; padding:0.82rem 1rem; background:rgba(255,255,255,0.14); border-radius:var(--radius-sm); font-weight:700; font-size:0.88rem; text-align:center; color:var(--white); }
-
 
 /* ============================================
    REVIEW SLIDER
@@ -446,9 +426,6 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
   .services-grid { grid-template-columns:1fr 1fr; }
   .about-grid { flex-direction:row; align-items:flex-start; }
   .about-photo { width:200px; min-width:160px; flex-shrink:0; }
-  .contact-grid { flex-direction:row; }
-  .contact-info { min-width:200px; flex:0 0 auto; }
-  .contact-form { flex:1; }
   .footer-inner { flex-direction:row; justify-content:space-between; text-align:left; }
 }
 
