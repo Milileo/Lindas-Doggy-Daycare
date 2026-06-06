@@ -1,6 +1,6 @@
 // /api/save-review.js
 // Saves a new review to pending-reviews.json via GitHub API
-// and sends email notification via Resend
+// and sends email notification via EmailJS REST API (server-side)
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -9,17 +9,19 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const GH_TOKEN     = process.env.GH_TOKEN;
-  const RESEND_KEY   = process.env.RESEND_API_KEY;
-  const REPO         = 'Milileo/Lindas-Doggy-Daycare';
-  const BRANCH       = 'main';
-  const FILE_PATH    = 'data/pending-reviews.json';
-  const BASE_URL     = 'https://lindasdoggydaycare.com';
-  const NOTIFY_EMAIL = 'mili6limi@gmail.com';
+  const GH_TOKEN  = process.env.GH_TOKEN;
+  const REPO      = 'Milileo/Lindas-Doggy-Daycare';
+  const BRANCH    = 'main';
+  const FILE_PATH = 'data/pending-reviews.json';
+  const BASE_URL  = 'https://www.lindasdoggydaycare.com';
 
-  if (!GH_TOKEN) {
-    return res.status(500).json({ error: 'GH_TOKEN missing' });
-  }
+  // EmailJS config (server-side REST call)
+  const EJS_SERVICE  = 'service_cs22ugn';
+  const EJS_TEMPLATE = 'template_6twtdnh';
+  const EJS_PUBLIC   = 'rn01OjX48srlic_N7';
+  const EJS_PRIVATE  = process.env.EMAILJS_PRIVATE_KEY || '';
+
+  if (!GH_TOKEN) return res.status(500).json({ error: 'GH_TOKEN missing' });
 
   let name, stars, text, reviewId;
   try {
@@ -36,13 +38,12 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'Missing or invalid fields' });
   }
 
-  const date = new Date().toLocaleDateString('de-DE');
+  const date       = new Date().toLocaleDateString('de-DE');
   const publishUrl = `${BASE_URL}/api/publish-review?id=${reviewId}`;
-  const starsText = '\u2605'.repeat(stars) + '\u2606'.repeat(5 - stars);
+  const starsText  = '★'.repeat(stars) + '☆'.repeat(5 - stars);
 
   // 1. Read current pending-reviews.json
-  let pending = [];
-  let currentSHA = '';
+  let pending = [], currentSHA = '';
   try {
     const ghRes = await fetch(
       `https://api.github.com/repos/${REPO}/contents/${FILE_PATH}?ref=${BRANCH}`,
@@ -84,49 +85,43 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'Could not save review', detail: err.message || '' });
   }
 
-  // 4. Send email via Resend
-  if (RESEND_KEY) {
-    try {
-      const emailRes = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${RESEND_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          from: "Lindas Doggy Daycare <onboarding@resend.dev>",
-          to: [NOTIFY_EMAIL],
-          subject: `\u2B50 Neue Bewertung von ${name} (${stars}/5 Sterne)`,
-          html: `
-            <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;background:#fff8f0;border-radius:12px;">
-              <h2 style="color:#b5651d;margin-top:0;">\uD83D\uDC3E Neue Kundenbewertung</h2>
-              <table style="width:100%;border-collapse:collapse;">
-                <tr><td style="padding:8px 0;font-weight:bold;color:#555;width:120px;">Name:</td><td>${name}</td></tr>
-                <tr><td style="padding:8px 0;font-weight:bold;color:#555;">Bewertung:</td><td style="color:#f0a500;font-size:20px;">${starsText} (${stars}/5)</td></tr>
-                <tr><td style="padding:8px 0;font-weight:bold;color:#555;">Datum:</td><td>${date}</td></tr>
-              </table>
-              <div style="background:#fff;border-left:4px solid #b5651d;padding:16px;margin:16px 0;border-radius:4px;">
-                <p style="margin:0;color:#333;font-style:italic;">"${text}"</p>
-              </div>
-              <a href="${publishUrl}" style="display:inline-block;background:#b5651d;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;margin-top:8px;">
-                \u2705 Bewertung ver\u00F6ffentlichen
-              </a>
-              <p style="color:#999;font-size:12px;margin-top:24px;">Linda's Doggy Daycare \u2014 automatische Benachrichtigung</p>
-            </div>
-          `
-        })
-      });
-      if (emailRes.ok) {
-        console.log('[save-review] \u2705 Email sent via Resend to', NOTIFY_EMAIL);
-      } else {
-        const errText = await emailRes.text();
-        console.warn('[save-review] Resend warning:', errText);
-      }
-    } catch (emailErr) {
-      console.warn('[save-review] Resend error (non-fatal):', emailErr.message);
+  // 4. Send email via EmailJS REST API (server-side — no browser needed)
+  try {
+    const ejsPayload = {
+      service_id:   EJS_SERVICE,
+      template_id:  EJS_TEMPLATE,
+      user_id:      EJS_PUBLIC,
+      template_params: {
+        name:        name,
+        stars:       starsText,
+        stars_count: String(stars),
+        message:     text,
+        publish_url: publishUrl,
+        date:        date,
+        email:       'mili6limi@gmail.com',
+      },
+    };
+
+    // Add private key if available (recommended for server-side)
+    if (EJS_PRIVATE) ejsPayload.accessToken = EJS_PRIVATE;
+
+    const ejsRes = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'origin': BASE_URL,
+      },
+      body: JSON.stringify(ejsPayload),
+    });
+
+    if (ejsRes.ok) {
+      console.log('[save-review] ✅ EmailJS notification sent');
+    } else {
+      const errText = await ejsRes.text();
+      console.warn('[save-review] EmailJS warning:', ejsRes.status, errText);
     }
-  } else {
-    console.warn('[save-review] RESEND_API_KEY not set — email skipped');
+  } catch (emailErr) {
+    console.warn('[save-review] Email error (non-fatal):', emailErr.message);
   }
 
   return res.status(200).json({ success: true, id: reviewId, publishUrl });
