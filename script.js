@@ -315,7 +315,7 @@ async function submitReview(e) {
 
   // Generate unique review ID
   const reviewId   = generateId();
-  const publishUrl = `https://lindas-doggy-daycare.vercel.app/api/publish-review?id=${reviewId}`;
+  const publishUrl = `${window.location.origin}/api/publish-review?id=${reviewId}`;
 
   try {
     // ---- Step 1: Save to pending-reviews.json via Vercel Function ----
@@ -459,46 +459,61 @@ function initRvDrag(total) {
 function renderReviews(reviews) {
   const list  = document.getElementById('reviewsList');
   const noMsg = document.getElementById('noReviewsMsg');
+  const badge = document.getElementById('reviewsCountBadge');
   if (!list) return;
 
   if (!reviews || reviews.length === 0) {
     list.innerHTML = '';
     if (noMsg) noMsg.style.display = '';
+    if (badge) badge.style.display = 'none';
     return;
   }
 
   if (noMsg) noMsg.style.display = 'none';
   rvTotalReviews = reviews.length;
 
-  const slidesHtml = reviews.map(r => `
+  // Update badge
+  if (badge) {
+    const avg = (reviews.reduce((s, r) => s + (r.stars || 0), 0) / reviews.length).toFixed(1);
+    const avgEl = document.getElementById('reviewsAvgStars');
+    const cntEl = document.getElementById('reviewsCountText');
+    if (avgEl) avgEl.textContent = avg + ' / 5';
+    if (cntEl) cntEl.textContent = reviews.length + ' Bewertung' + (reviews.length === 1 ? '' : 'en');
+    badge.style.display = '';
+  }
+
+  // Newest first
+  const sorted = [...reviews].reverse();
+
+  const slidesHtml = sorted.map(r => `
     <div class="rv-slide">
       <div class="review-card">
         <div class="review-header">
-          <span class="review-author">${escHtml(r.name)}</span>
           <span class="review-stars">${starsHTML(r.stars)}</span>
+          <span class="review-author">${escHtml(r.name)}</span>
           <span class="review-date">${r.date || ''}</span>
         </div>
-        <p class="review-text">${escHtml(r.text)}</p>
+        <p class="review-text">&ldquo;${escHtml(r.text)}&rdquo;</p>
       </div>
     </div>`).join('');
 
   list.innerHTML = `
     <div class="reviews-slider-outer">
-      <button class="slider-btn rv-prev" aria-label="Previous" onclick="goToRvSlide(rvSliderIndex-1,${reviews.length})">&#8249;</button>
+      <button class="slider-btn rv-prev" aria-label="Previous" onclick="goToRvSlide(rvSliderIndex-1,${sorted.length})">&#8249;</button>
       <div class="reviews-viewport rv-viewport">
         <div class="slider-track" id="reviewsTrack" style="display:flex">${slidesHtml}</div>
       </div>
-      <button class="slider-btn rv-next" aria-label="Next" onclick="goToRvSlide(rvSliderIndex+1,${reviews.length})">&#8250;</button>
+      <button class="slider-btn rv-next" aria-label="Next" onclick="goToRvSlide(rvSliderIndex+1,${sorted.length})">&#8250;</button>
     </div>
     <div class="slider-dots" id="reviewsDots"></div>`;
 
   // Init slider interactions after DOM is painted
   setTimeout(() => {
-    buildRvDots(reviews.length);
-    initRvDrag(reviews.length);
+    buildRvDots(sorted.length);
+    initRvDrag(sorted.length);
     window.addEventListener('resize', () => {
-      buildRvDots(reviews.length);
-      goToRvSlide(Math.min(rvSliderIndex, rvMaxIndex(reviews.length)), reviews.length);
+      buildRvDots(sorted.length);
+      goToRvSlide(Math.min(rvSliderIndex, rvMaxIndex(sorted.length)), sorted.length);
     });
   }, 50);
 }
