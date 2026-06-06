@@ -271,7 +271,7 @@ function setStars(val) {
 // Dashboard → Email Templates → Template ID
 const EMAILJS_PUBLIC_KEY  = 'rn01OjX48srlic_N7';
 const EMAILJS_SERVICE_ID  = 'service_cs22ugn';
-const EMAILJS_TEMPLATE_ID = 'template_nofngog';  // ← Replace this
+const EMAILJS_TEMPLATE_ID = 'template_6twtdnh';
 
 // ---- Init EmailJS once DOM is ready ----
 function initEmailJS() {
