@@ -400,7 +400,8 @@ let rvSliderIndex = 0;
 let rvTotalReviews = 0;
 
 function getRvVisibleCount() {
-  return window.innerWidth >= 900 ? 4.5 : 1.45;
+  // Must match CSS: @media(min-width:900px) => calc(100%/3.3), else calc(100%/1.2)
+  return window.innerWidth >= 900 ? 3.3 : 1.2;
 }
 
 function getRvSlideWidth() {
@@ -540,17 +541,21 @@ function renderReviews(reviews) {
     <div class="slider-dots" id="reviewsDots"></div>`;
 
   // Init slider interactions after DOM is painted
-  setTimeout(() => {
-    buildRvDots(sorted.length);
-    initRvDrag(sorted.length);
-    // Remove old resize listener before adding new one
-    if (window._rvResizeHandler) window.removeEventListener('resize', window._rvResizeHandler);
-    window._rvResizeHandler = () => {
+  // Use double-rAF to ensure layout is complete before reading offsetWidth
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
       buildRvDots(sorted.length);
-      goToRvSlide(Math.min(rvSliderIndex, rvMaxIndex(sorted.length)), sorted.length);
-    };
-    window.addEventListener('resize', window._rvResizeHandler);
-  }, 50);
+      goToRvSlide(0, sorted.length); // reset position cleanly after layout
+      initRvDrag(sorted.length);
+      // Remove old resize listener before adding new one
+      if (window._rvResizeHandler) window.removeEventListener('resize', window._rvResizeHandler);
+      window._rvResizeHandler = () => {
+        buildRvDots(sorted.length);
+        goToRvSlide(Math.min(rvSliderIndex, rvMaxIndex(sorted.length)), sorted.length);
+      };
+      window.addEventListener('resize', window._rvResizeHandler);
+    });
+  });
 
   // Sync language display on dynamically rendered elements
   setLang(currentLang);
@@ -647,3 +652,4 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   loadReviews();
 });
+
