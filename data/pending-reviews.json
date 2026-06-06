@@ -118,5 +118,13 @@
     "text": "Live Test vom Superagenten",
     "date": "6.6.2026",
     "publishUrl": "https://lindasdoggydaycare.com/api/publish-review?id=livetest_1780727378"
+  },
+  {
+    "id": "emailtest_1780727462",
+    "name": "Test Bewertung",
+    "stars": 5,
+    "text": "Test ob die Mail jetzt server-seitig ankommt",
+    "date": "6.6.2026",
+    "publishUrl": "https://www.lindasdoggydaycare.com/api/publish-review?id=emailtest_1780727462"
   }
 ]
