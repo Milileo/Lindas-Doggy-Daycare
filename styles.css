@@ -470,7 +470,7 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
 .footer-nav { display:flex; flex-wrap:wrap; gap:0.4rem 1.1rem; justify-content:center; }
 .footer-nav a { font-size:0.8rem; font-weight:700; color:rgba(255,255,255,0.72); transition:color 0.2s; }
 .footer-nav a:hover { color:var(--white); }
-.footer-socials { display:flex; align-items:center; gap:0.9rem; }
+.footer-socials { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
 .social-link { font-size:1.45rem; transition:transform 0.2s, opacity 0.2s; display:flex; align-items:center; opacity:0.85; }
 .social-link:hover { transform:scale(1.2); opacity:1; }
 .footer-bottom { border-top:1px solid rgba(255,255,255,0.1); padding-top:1.1rem; text-align:center; }
