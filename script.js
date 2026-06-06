@@ -101,7 +101,7 @@ let dragDelta   = 0;
 const TOTAL_SLIDES = GALLERY_IMAGES.length; // 18
 
 function getVisibleCount() {
-  return window.innerWidth >= 900 ? 4.5 : 1.45;
+  return window.innerWidth >= 1100 ? 2 : window.innerWidth >= 700 ? 1.15 : 1;
 }
 function getSlideWidth() {
   const slide = document.querySelector('#galleryTrack .slide');
@@ -442,14 +442,14 @@ function buildRvDots(total) {
 }
 
 function initRvDrag(total) {
-  const viewport = document.querySelector('.rv-viewport');
-  const track    = document.getElementById('reviewsTrack');
-  if (!viewport || !track) return;
+  const vpClean = document.querySelector('.rv-viewport');
+  const trClean = document.getElementById('reviewsTrack');
+  if (!vpClean || !trClean) return;
 
   let isDragging = false, dragStartX = 0, dragDelta = 0;
 
-  const startDrag = x => { isDragging = true; dragStartX = x; dragDelta = 0; track.style.transition = 'none'; };
-  const moveDrag  = x => { if (!isDragging) return; dragDelta = x - dragStartX; track.style.transform = `translateX(${-rvSliderIndex * getRvSlideWidth() + dragDelta}px)`; };
+  const startDrag = x => { isDragging = true; dragStartX = x; dragDelta = 0; trClean.style.transition = 'none'; };
+  const moveDrag  = x => { if (!isDragging) return; dragDelta = x - dragStartX; trClean.style.transform = `translateX(${-rvSliderIndex * getRvSlideWidth() + dragDelta}px)`; };
   const endDrag   = ()  => {
     if (!isDragging) return;
     isDragging = false;
@@ -458,13 +458,13 @@ function initRvDrag(total) {
     else                       goToRvSlide(rvSliderIndex,     total);
   };
 
-  viewport.addEventListener('mousedown',  e => startDrag(e.clientX));
-  viewport.addEventListener('mousemove',  e => { if (isDragging) moveDrag(e.clientX); });
-  viewport.addEventListener('mouseup',    endDrag);
-  viewport.addEventListener('mouseleave', endDrag);
-  viewport.addEventListener('touchstart', e => startDrag(e.touches[0].clientX), { passive: true });
-  viewport.addEventListener('touchmove',  e => moveDrag(e.touches[0].clientX),  { passive: true });
-  viewport.addEventListener('touchend',   endDrag);
+  vpClean.addEventListener('mousedown',  e => startDrag(e.clientX));
+  vpClean.addEventListener('mousemove',  e => { if (isDragging) moveDrag(e.clientX); });
+  vpClean.addEventListener('mouseup',    endDrag);
+  vpClean.addEventListener('mouseleave', endDrag);
+  vpClean.addEventListener('touchstart', e => startDrag(e.touches[0].clientX), { passive: true });
+  vpClean.addEventListener('touchmove',  e => moveDrag(e.touches[0].clientX),  { passive: true });
+  vpClean.addEventListener('touchend',   endDrag);
 }
 
 function renderReviews(reviews) {
@@ -501,6 +501,7 @@ function renderReviews(reviews) {
   }
 
   // Newest first
+  rvSliderIndex = 0;
   const sorted = [...reviews].reverse();
 
   const slidesHtml = sorted.map((r, idx) => {
@@ -542,10 +543,13 @@ function renderReviews(reviews) {
   setTimeout(() => {
     buildRvDots(sorted.length);
     initRvDrag(sorted.length);
-    window.addEventListener('resize', () => {
+    // Remove old resize listener before adding new one
+    if (window._rvResizeHandler) window.removeEventListener('resize', window._rvResizeHandler);
+    window._rvResizeHandler = () => {
       buildRvDots(sorted.length);
       goToRvSlide(Math.min(rvSliderIndex, rvMaxIndex(sorted.length)), sorted.length);
-    });
+    };
+    window.addEventListener('resize', window._rvResizeHandler);
   }, 50);
 
   // Sync language display on dynamically rendered elements
