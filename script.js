@@ -60,6 +60,17 @@ function setLang(lang) {
     btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
   });
   loadReviews();
+
+  // Update review count badge language
+  const cntEl2 = document.getElementById('reviewsCountText');
+  if (cntEl2 && cntEl2.textContent) {
+    const num = parseInt(cntEl2.textContent);
+    if (!isNaN(num)) {
+      cntEl2.textContent = lang === 'de'
+        ? num + ' Bewertung' + (num === 1 ? '' : 'en')
+        : num + ' Review' + (num === 1 ? '' : 's');
+    }
+  }
 }
 
 // ============================================================
@@ -478,7 +489,14 @@ function renderReviews(reviews) {
     const avgEl = document.getElementById('reviewsAvgStars');
     const cntEl = document.getElementById('reviewsCountText');
     if (avgEl) avgEl.textContent = avg + ' / 5';
-    if (cntEl) cntEl.textContent = reviews.length + ' Bewertung' + (reviews.length === 1 ? '' : 'en');
+    if (cntEl) {
+      const lang = currentLang || document.documentElement.lang || 'en';
+      if (lang === 'de') {
+        cntEl.textContent = reviews.length + ' Bewertung' + (reviews.length === 1 ? '' : 'en');
+      } else {
+        cntEl.textContent = reviews.length + ' Review' + (reviews.length === 1 ? '' : 's');
+      }
+    }
     badge.style.display = '';
   }
 
@@ -529,6 +547,9 @@ function renderReviews(reviews) {
       goToRvSlide(Math.min(rvSliderIndex, rvMaxIndex(sorted.length)), sorted.length);
     });
   }, 50);
+
+  // Sync language display on dynamically rendered elements
+  setLang(currentLang);
 }
 
 async function loadReviews() {
