@@ -322,12 +322,12 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
    REVIEWS
 ============================================ */
 .reviews-list { display:flex; flex-direction:column; gap:1.1rem; margin-top:1.75rem; margin-bottom:2.5rem; }
-.review-card { background:var(--card-bg); border:1px solid var(--card-border); border-radius:var(--radius); padding:1.4rem 1.5rem; backdrop-filter:blur(8px); }
-.review-header { display:flex; align-items:center; gap:0.75rem; margin-bottom:0.6rem; flex-wrap:wrap; }
-.review-author { font-weight:700; font-size:0.95rem; color:var(--white); }
-.review-stars  { color:#ffd700; font-size:1.05rem; letter-spacing:0.05em; }
-.review-date   { font-size:0.72rem; color:rgba(255,255,255,0.5); margin-left:auto; }
-.review-text   { font-size:0.9rem; color:rgba(255,255,255,0.88); }
+.review-card { background:var(--card-bg); border:1px solid var(--card-border); border-radius:var(--radius); padding:0.7rem 0.9rem; backdrop-filter:blur(8px); }
+.review-header { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.3rem; flex-wrap:wrap; }
+.review-author { font-weight:700; font-size:0.8rem; color:var(--white); }
+.review-stars  { color:#ffd700; font-size:0.85rem; letter-spacing:0.05em; }
+.review-date   { font-size:0.62rem; color:rgba(255,255,255,0.5); margin-left:auto; }
+.review-text   { font-size:0.78rem; color:rgba(255,255,255,0.88); line-height:1.45; }
 .no-reviews-msg { text-align:center; opacity:0.6; margin-top:1rem; margin-bottom:2rem; }
 
 .review-form-wrap { background:var(--card-bg); border:1px solid var(--card-border); border-radius:var(--radius); padding:1.75rem 1.5rem; backdrop-filter:blur(8px); margin-top:0.5rem; }
@@ -642,11 +642,11 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  margin-top: 0.65rem;
+  margin-top:0.325rem;
   background: none;
   border: none;
   color: var(--accent-light, rgba(255,255,255,0.65));
-  font-size: 0.8rem;
+  font-size:0.72rem;
   font-weight: 600;
   letter-spacing: 0.03em;
   cursor: pointer;
