@@ -362,8 +362,9 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
   gap: 0;
   position: relative;
   width: 100%;
-  padding: 0 0.5rem;
+  padding: 0;
   margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
 }
 .rv-viewport {
   flex: 1;
@@ -375,26 +376,90 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
 
 /* Mobile: 1 full + 0.45 peek */
 .rv-slide {
-  flex: 0 0 calc(100% / 1.45);
-  min-width: calc(100% / 1.45);
-  padding: 0 0.35rem;
+  flex: 0 0 calc(100% / 1.2);
+  min-width: calc(100% / 1.2);
+  padding: 0 0.45rem;
+}
+
+@media (min-width: 600px) {
+  .rv-slide {
+    flex: 0 0 calc(100% / 2.2);
+    min-width: calc(100% / 2.2);
+  }
 }
 
 @media (min-width: 900px) {
-  /* Desktop: 4 full + 0.5 peek */
+  /* Desktop: 3 full + 0.3 peek */
   .rv-slide {
-    flex: 0 0 calc(100% / 4.5);
-    min-width: calc(100% / 4.5);
+    flex: 0 0 calc(100% / 3.3);
+    min-width: calc(100% / 3.3);
   }
 }
 
 .rv-slide .review-card {
   height: 100%;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 16px;
+  padding: 1.5rem 1.4rem 1.3rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.rv-slide .review-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.22);
+}
+.rv-slide .review-text {
+  flex: 1;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.90);
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+.rv-slide .review-stars {
+  font-size: 1.15rem;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+.rv-slide .review-header {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  margin-bottom: 0.75rem;
+}
+.rv-slide .review-author {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--white);
+}
+.rv-slide .review-date {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.45);
+  margin-left: 0;
 }
 
-.rv-prev { margin-right: 0.4rem; }
-.rv-next { margin-left:  0.4rem; }
+.rv-prev { margin-right: 0.3rem; flex-shrink: 0; }
+.rv-next { margin-left: 0.3rem; flex-shrink: 0; }
+
+.reviews-count-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50px;
+  padding: 0.3rem 0.85rem;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 0.5rem;
+}
+.reviews-count-badge .badge-stars {
+  color: #ffd700;
+  font-size: 0.85rem;
+}
 
 /* ============================================
    FOOTER
