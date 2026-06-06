@@ -94,5 +94,13 @@
     "text": "Super Testbewertung",
     "date": "5.6.2026",
     "publishUrl": "https://lindasdoggydaycare.com/api/publish-review?id=test123"
+  },
+  {
+    "id": "test_1780726872",
+    "name": "Superagent Test",
+    "stars": 5,
+    "text": "Dieser Test prüft ob der GH_TOKEN korrekt gesetzt ist und Reviews gespeichert werden können.",
+    "date": "6.6.2026",
+    "publishUrl": "https://lindasdoggydaycare.com/api/publish-review?id=test_1780726872"
   }
 ]
