@@ -498,7 +498,7 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
    DESKTOP ≥ 900px
 ============================================ */
 @media (min-width: 900px) {
-  .services-grid { grid-template-columns:repeat(4,1fr); }
+  .services-grid { grid-template-columns:repeat(3,1fr); }
   .location-grid { flex-direction:row; align-items:flex-start; gap:2.5rem; }
   .location-text { flex:1; }
   .location-map  { flex:1; }
