@@ -629,3 +629,33 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
     font-size: 0.88rem;
   }
 }
+
+/* ============================================
+   REVIEW EXPAND / COLLAPSE
+   ============================================ */
+.rv-short,
+.rv-full {
+  display: inline;
+}
+
+.rv-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.65rem;
+  background: none;
+  border: none;
+  color: var(--accent-light, rgba(255,255,255,0.65));
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  padding: 0.2rem 0;
+  transition: color 0.2s;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.rv-toggle:hover {
+  color: #fff;
+}
