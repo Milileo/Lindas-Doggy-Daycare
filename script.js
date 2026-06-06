@@ -485,7 +485,13 @@ function renderReviews(reviews) {
   // Newest first
   const sorted = [...reviews].reverse();
 
-  const slidesHtml = sorted.map(r => `
+  const slidesHtml = sorted.map((r, idx) => {
+    const MAX_CHARS = 320;
+    const fullText  = escHtml(r.text);
+    const isLong    = fullText.length > MAX_CHARS;
+    const shortText = isLong ? fullText.slice(0, MAX_CHARS).trimEnd() + '…' : fullText;
+    const uid       = 'rv-' + idx;
+    return `
     <div class="rv-slide">
       <div class="review-card">
         <div class="review-header">
@@ -493,9 +499,16 @@ function renderReviews(reviews) {
           <span class="review-author">${escHtml(r.name)}</span>
           <span class="review-date">${r.date || ''}</span>
         </div>
-        <p class="review-text">&ldquo;${escHtml(r.text)}&rdquo;</p>
+        <p class="review-text" id="${uid}-text">
+          <span class="rv-short">&ldquo;${shortText}&rdquo;</span>
+          ${isLong ? `<span class="rv-full" style="display:none">&ldquo;${fullText}&rdquo;</span>` : ''}
+        </p>
+        ${isLong ? `<button class="rv-toggle" data-uid="${uid}" onclick="toggleReviewText('${uid}')">
+          <span class="lang-de">Mehr anzeigen ▾</span><span class="lang-en">Read more ▾</span>
+        </button>` : ''}
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 
   list.innerHTML = `
     <div class="reviews-slider-outer">
@@ -531,6 +544,28 @@ async function loadReviews() {
   } catch (e) {
     console.error('[loadReviews] Network error:', e.message);
     renderReviews([]);
+  }
+}
+
+// ── Review text expand/collapse
+function toggleReviewText(uid) {
+  const shortEl = document.querySelector('#' + uid + '-text .rv-short');
+  const fullEl  = document.querySelector('#' + uid + '-text .rv-full');
+  const btn     = document.querySelector('[data-uid="' + uid + '"]');
+  if (!shortEl || !fullEl || !btn) return;
+
+  const isExpanded = fullEl.style.display !== 'none';
+  shortEl.style.display = isExpanded ? '' : 'none';
+  fullEl.style.display  = isExpanded ? 'none' : '';
+
+  const deSpan = btn.querySelector('.lang-de');
+  const enSpan = btn.querySelector('.lang-en');
+  if (isExpanded) {
+    if (deSpan) deSpan.textContent = 'Mehr anzeigen ▾';
+    if (enSpan) enSpan.textContent = 'Read more ▾';
+  } else {
+    if (deSpan) deSpan.textContent = 'Weniger anzeigen ▴';
+    if (enSpan) enSpan.textContent = 'Show less ▴';
   }
 }
 
