@@ -59,7 +59,7 @@ function setLang(lang) {
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
   });
-  loadReviews();
+  // NOTE: loadReviews() is NOT called here — reviews call setLang() themselves after render
 
   // Update review count badge language
   const cntEl2 = document.getElementById('reviewsCountText');
@@ -557,8 +557,11 @@ function renderReviews(reviews) {
     });
   });
 
-  // Sync language display on dynamically rendered elements
-  setLang(currentLang);
+  // Sync language display on dynamically rendered elements (without re-triggering loadReviews)
+  const lang = currentLang;
+  document.querySelectorAll('.lang-de, .lang-en').forEach(el => {
+    el.style.display = el.classList.contains('lang-' + lang) ? '' : 'none';
+  });
 }
 
 async function loadReviews() {
@@ -650,6 +653,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSlider();
   initLightbox();
   initScrollAnimations();
-  loadReviews();
+  loadReviews(); // called once here; setLang() no longer calls it
 });
 
