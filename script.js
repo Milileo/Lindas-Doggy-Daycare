@@ -269,7 +269,7 @@ function setStars(val) {
 // REPLACE the two placeholders below with your actual values from emailjs.com
 // Dashboard → Account → API Keys → Public Key
 // Dashboard → Email Templates → Template ID
-const EMAILJS_PUBLIC_KEY  = 'JE0HI_6Ix3oeNHRmU';
+const EMAILJS_PUBLIC_KEY  = 'rn01OjX48srlic_N7';
 const EMAILJS_SERVICE_ID  = 'service_cs22ugn';
 const EMAILJS_TEMPLATE_ID = 'template_nofngog';  // ← Replace this
 
