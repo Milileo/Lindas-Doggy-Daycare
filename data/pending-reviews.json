@@ -150,5 +150,13 @@
     "text": "Alles funktioniert perfekt!",
     "date": "7.6.2026",
     "publishUrl": "https://www.lindasdoggydaycare.com/api/publish-review?id=livetest001"
+  },
+  {
+    "id": "mq3l3bof14gjl",
+    "name": "Test Kunde 3",
+    "stars": 5,
+    "text": "fdghjklö",
+    "date": "7.6.2026",
+    "publishUrl": "https://www.lindasdoggydaycare.com/api/publish-review?id=mq3l3bof14gjl"
   }
 ]
