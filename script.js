@@ -359,8 +359,8 @@ async function submitReview(e) {
           message:       text,
           publish_url:   publishUrl,
           date:          new Date().toLocaleDateString('de-DE'),
-          email:         'l.m@hotmail.ch',
-          to_email:      'l.m@hotmail.ch',
+          email:         'ms88@hotmail.de',
+          to_email:      'ms88@hotmail.de',
         };
         const response = await emailjs.send('service_t40ka4h', 'template_nofngog', templateParams, 'JE0Hl_6lx3oeNHRmU');
         emailSent = true;
