@@ -59,6 +59,14 @@ function setLang(lang) {
       el.textContent = lang === 'de' ? el.getAttribute('data-de') : el.getAttribute('data-en');
     }
   });
+
+  // Update placeholders
+  document.querySelectorAll('[data-placeholder-de]').forEach(el => {
+    el.placeholder = lang === 'de'
+      ? el.getAttribute('data-placeholder-de')
+      : el.getAttribute('data-placeholder-en');
+  });
+
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
   });
