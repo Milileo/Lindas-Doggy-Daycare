@@ -1,13 +1,19 @@
 
 /* ── Language visibility ─────────────────────────────────────────────── */
-[data-lang="en"] .lang-de,
-body:not([data-lang="de"]) .lang-de { display: none !important; }
+.lang-de,
+.lang-en { display: none !important; }
 
-[data-lang="en"] .lang-en,
-body:not([data-lang="de"]) .lang-en { display: revert !important; }
+[data-lang="de"] .lang-de { display: block !important; }
+[data-lang="en"] .lang-en { display: block !important; }
 
-[data-lang="de"] .lang-en { display: none !important; }
-[data-lang="de"] .lang-de { display: revert !important; }
+/* inline elements (span, a, button) */
+[data-lang="de"] span.lang-de,
+[data-lang="de"] a.lang-de,
+[data-lang="de"] button.lang-de { display: inline !important; }
+
+[data-lang="en"] span.lang-en,
+[data-lang="en"] a.lang-en,
+[data-lang="en"] button.lang-en { display: inline !important; }
 /* ──────────────────────────────────────────────────────────────────────── */
 /* ============================================
    LINDA'S DOGGY DAYCARE – styles.css v3
