@@ -45,13 +45,14 @@ let currentLang = localStorage.getItem('ldd_lang') || 'en';
 function setLang(lang) {
   currentLang = lang;
   localStorage.setItem('ldd_lang', lang);
-  // CSS übernimmt display via body[data-lang] Selektor
   document.body.setAttribute('data-lang', lang);
-  document.documentElement.lang = lang;
+  document.documentElement.setAttribute('lang', lang);
 
-  // Inline styles zurücksetzen damit CSS greift
+  // Direkt via inline style setzen — unabhängig von CSS
+  const INLINE_TAGS = new Set(['SPAN', 'A', 'BUTTON', 'STRONG', 'EM', 'I', 'B', 'LABEL']);
   document.querySelectorAll('.lang-de, .lang-en').forEach(el => {
-    el.style.display = '';
+    const show = el.classList.contains('lang-' + lang);
+    el.style.setProperty('display', show ? (INLINE_TAGS.has(el.tagName) ? 'inline' : 'block') : 'none', 'important');
   });
   document.querySelectorAll('[data-de]').forEach(el => {
     if (!el.querySelector('[data-de]')) {
