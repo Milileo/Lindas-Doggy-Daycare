@@ -1,5 +1,10 @@
 
 /* ── Language visibility ─────────────────────────────────────────────── */
+/* KEIN !important — JS setzt inline styles die immer gewinnen           */
+.lang-de { display: none; }
+.lang-en { display: block; }
+span.lang-en, a.lang-en, button.lang-en { display: inline; }
+/* ──────────────────────────────────────────────────────────────────────── */
 /* Alle lang-Elemente initial verstecken */
 .lang-de,
 .lang-en { display: none !important; }
