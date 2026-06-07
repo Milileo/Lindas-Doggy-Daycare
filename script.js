@@ -305,7 +305,7 @@ function generateId()  { return Date.now().toString(36) + Math.random().toString
 // ============================================================
 // REVIEW FORM — Submit
 // ============================================================
-async async function submitReview(e) {
+async function submitReview(e) {
   e.preventDefault();
 
   // Validate star selection
