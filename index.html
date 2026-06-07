@@ -2,6 +2,24 @@
 <!-- redeploy fix -->
 <html lang="en">
 <head>
+  <style>
+    /* Language init — hide non-active lang BEFORE JS fires (prevents flash) */
+    body:not([data-lang="de"]) .lang-de { display: none !important; }
+    body:not([data-lang="en"]) .lang-en { display: none !important; }
+    /* Default: EN active until JS sets data-lang */
+    body .lang-de { display: none; }
+    body[data-lang="de"] .lang-de { display: block; }
+    body[data-lang="de"] .lang-en { display: none; }
+    body[data-lang="en"] .lang-de { display: none; }
+    body[data-lang="en"] .lang-en { display: block; }
+    /* Inline elements */
+    body[data-lang="de"] span.lang-de,
+    body[data-lang="de"] a.lang-de,
+    body[data-lang="de"] button.lang-de { display: inline !important; }
+    body[data-lang="en"] span.lang-en,
+    body[data-lang="en"] a.lang-en,
+    body[data-lang="en"] button.lang-en { display: inline !important; }
+  </style>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -100,6 +118,19 @@
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body data-lang="en">
+<script>
+  (function(){
+    var l = localStorage.getItem('ldd_lang') || 'en';
+    document.documentElement.setAttribute('lang', l);
+    document.body && document.body.setAttribute('data-lang', l);
+    // Warte auf DOM falls body noch nicht fertig
+    if (!document.body) {
+      document.addEventListener('DOMContentLoaded', function(){
+        document.body.setAttribute('data-lang', l);
+      });
+    }
+  })();
+</script>
 
   <!-- HEADER -->
   <header id="header">
@@ -405,7 +436,7 @@
         <form class="review-form" id="reviewForm" onsubmit="submitReview(event)">
           <div class="form-group">
             <label for="rName"><span class="lang-de">Name</span><span class="lang-en">Name</span></label>
-            <input type="text" id="rName" name="rName" required placeholder="Your name / Dein Name" />
+            <input type="text" id="rName" name="rName" required placeholder="Your name" data-placeholder-de="Dein Name" data-placeholder-en="Your name" />
           </div>
           <div class="form-group">
             <label><span class="lang-de">Bewertung</span><span class="lang-en">Rating</span></label>
@@ -420,7 +451,7 @@
           </div>
           <div class="form-group">
             <label for="rText"><span class="lang-de">Nachricht</span><span class="lang-en">Message</span></label>
-            <textarea id="rText" name="rText" rows="4" required placeholder="Your experience... / Deine Erfahrung..."></textarea>
+            <textarea id="rText" name="rText" rows="4" required placeholder="Your experience..." data-placeholder-de="Deine Erfahrung..." data-placeholder-en="Your experience..."></textarea>
           </div>
           <button type="submit" class="btn-primary btn-full">
             <span class="lang-de">Bewertung absenden ⭐</span>
