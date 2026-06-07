@@ -48,11 +48,11 @@ function setLang(lang) {
   document.body.setAttribute('data-lang', lang);
   document.documentElement.setAttribute('lang', lang);
 
-  // Direkt via inline style setzen — unabhängig von CSS
+  // Inline style direkt setzen — gewinnt immer über CSS-Klassen (ohne !important in CSS)
   const INLINE_TAGS = new Set(['SPAN', 'A', 'BUTTON', 'STRONG', 'EM', 'I', 'B', 'LABEL']);
   document.querySelectorAll('.lang-de, .lang-en').forEach(el => {
     const show = el.classList.contains('lang-' + lang);
-    el.style.setProperty('display', show ? (INLINE_TAGS.has(el.tagName) ? 'inline' : 'block') : 'none', 'important');
+    el.style.display = show ? (INLINE_TAGS.has(el.tagName) ? 'inline' : 'block') : 'none';
   });
   document.querySelectorAll('[data-de]').forEach(el => {
     if (!el.querySelector('[data-de]')) {
