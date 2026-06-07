@@ -142,5 +142,13 @@
     "text": "Test review",
     "date": "7.6.2026",
     "publishUrl": "https://www.lindasdoggydaycare.com/api/publish-review?id=test123"
+  },
+  {
+    "id": "livetest001",
+    "name": "Linda Test",
+    "stars": 5,
+    "text": "Alles funktioniert perfekt!",
+    "date": "7.6.2026",
+    "publishUrl": "https://www.lindasdoggydaycare.com/api/publish-review?id=livetest001"
   }
 ]
