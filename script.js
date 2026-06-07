@@ -49,7 +49,7 @@ function setLang(lang) {
   document.documentElement.lang = lang;
 
   document.querySelectorAll('.lang-de, .lang-en').forEach(el => {
-    el.style.display = el.classList.contains('lang-' + lang) ? '' : 'none';
+    el.style.display = '';  // CSS via data-lang übernimmt alles
   });
   document.querySelectorAll('[data-de]').forEach(el => {
     if (!el.querySelector('[data-de]')) {
