@@ -98,7 +98,7 @@ module.exports = async function handler(req, res) {
         message:     text,
         publish_url: publishUrl,
         date:        date,
-        email:       'mili6limi@gmail.com',
+        email:       'ms88@hotmail.de',
       },
     };
 
