@@ -544,6 +544,9 @@ function renderReviews(reviews) {
     </div>
     <div class="slider-dots" id="reviewsDots"></div>`;
 
+  // Sprache auf neue Review-Elemente anwenden
+  setLang(currentLang);
+
   // Init slider interactions after DOM is painted
   // Use double-rAF to ensure layout is complete before reading offsetWidth
   requestAnimationFrame(() => {
