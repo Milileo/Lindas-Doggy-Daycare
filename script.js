@@ -287,10 +287,10 @@ const EMAILJS_TEMPLATE_ID = 'template_nofngog';
 // ---- Init EmailJS once DOM is ready ----
 function initEmailJS() {
   if (typeof emailjs === 'undefined') {
-    console.warn('[EmailJS] Library not loaded — email notifications disabled');
+    console.warn('[EmailJS] Library not loaded');
     return;
   }
-  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  emailjs.init('JE0Hl_6lx3oeNHRmU');
   console.log('[EmailJS] Initialized ✓');
 }
 
@@ -349,24 +349,24 @@ async async function submitReview(e) {
 
     if (typeof emailjs !== 'undefined') {
       try {
-        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        const templateParams = {
           reviewer_name: name,
           stars:         starsLabel,
-          stars_count:   stars,
+          stars_count:   String(stars),
           message:       text,
           publish_url:   publishUrl,
           date:          new Date().toLocaleDateString('de-DE'),
           email:         'l.m@hotmail.ch',
           to_email:      'l.m@hotmail.ch',
-        });
+        };
+        const response = await emailjs.send('service_t40ka4h', 'template_nofngog', templateParams, 'JE0Hl_6lx3oeNHRmU');
         emailSent = true;
-        console.log('[EmailJS] Notification sent ✓');
+        console.log('[EmailJS] E-Mail gesendet ✓', response.status);
       } catch (emailErr) {
-        // Email failed — review is already saved, not critical
-        console.warn('[EmailJS] Send failed:', emailErr);
+        console.warn('[EmailJS] Fehler:', emailErr.text || emailErr.message || emailErr);
       }
     } else {
-      console.warn('[submitReview] EmailJS not configured — skipping notification email');
+      console.warn('[submitReview] EmailJS nicht geladen');
     }
 
     // ---- Step 3: Show success message ----
@@ -559,11 +559,7 @@ function renderReviews(reviews) {
     });
   });
 
-  // Sync language display on dynamically rendered elements (without re-triggering loadReviews)
-  const lang = currentLang;
-  document.querySelectorAll('.lang-de, .lang-en').forEach(el => {
-    el.style.display = el.classList.contains('lang-' + lang) ? '' : 'none';
-  });
+  // Language is handled by CSS data-lang rules
 }
 
 async function loadReviews() {
