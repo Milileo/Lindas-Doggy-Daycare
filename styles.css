@@ -1,26 +1,32 @@
 
 /* ── Language visibility ─────────────────────────────────────────────── */
-/* Standard: Englisch sichtbar */
-.lang-de { display: none; }
-.lang-en { display: block; }
+/* Alle lang-Elemente initial verstecken */
+.lang-de,
+.lang-en { display: none !important; }
 
-/* Deutsch aktiv */
-body[data-lang="de"] .lang-de { display: block; }
-body[data-lang="de"] .lang-en { display: none; }
+/* Englisch (Standard) */
+html[lang="en"] .lang-en,
+body[data-lang="en"] .lang-en { display: block !important; }
 
-/* Inline-Elemente */
-span.lang-en, a.lang-en, button.lang-en,
-strong.lang-en, li.lang-en { display: inline; }
+/* Deutsch */
+html[lang="de"] .lang-de,
+body[data-lang="de"] .lang-de { display: block !important; }
 
+/* Inline-Elemente EN */
+html[lang="en"] span.lang-en,
+html[lang="en"] a.lang-en,
+html[lang="en"] button.lang-en,
+body[data-lang="en"] span.lang-en,
+body[data-lang="en"] a.lang-en,
+body[data-lang="en"] button.lang-en { display: inline !important; }
+
+/* Inline-Elemente DE */
+html[lang="de"] span.lang-de,
+html[lang="de"] a.lang-de,
+html[lang="de"] button.lang-de,
 body[data-lang="de"] span.lang-de,
 body[data-lang="de"] a.lang-de,
-body[data-lang="de"] button.lang-de,
-body[data-lang="de"] strong.lang-de,
-body[data-lang="de"] li.lang-de { display: inline; }
-
-body[data-lang="de"] span.lang-en,
-body[data-lang="de"] a.lang-en,
-body[data-lang="de"] button.lang-en { display: none; }
+body[data-lang="de"] button.lang-de { display: inline !important; }
 /* ──────────────────────────────────────────────────────────────────────── */
 /* ============================================
    LINDA'S DOGGY DAYCARE – styles.css v3
