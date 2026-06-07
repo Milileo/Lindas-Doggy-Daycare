@@ -48,8 +48,13 @@ function setLang(lang) {
   document.body.setAttribute('data-lang', lang);
   document.documentElement.lang = lang;
 
+  // Zeige/verstecke alle lang-Elemente direkt via inline style
   document.querySelectorAll('.lang-de, .lang-en').forEach(el => {
-    el.style.display = '';  // CSS via data-lang übernimmt alles
+    const isTarget = el.classList.contains('lang-' + lang);
+    // inline-Elemente (span, button, a) → inline, Block-Elemente → block
+    const tag = el.tagName.toLowerCase();
+    const inlineTags = ['span', 'a', 'button', 'strong', 'em', 'i', 'b'];
+    el.style.display = isTarget ? (inlineTags.includes(tag) ? 'inline' : 'block') : 'none';
   });
   document.querySelectorAll('[data-de]').forEach(el => {
     if (!el.querySelector('[data-de]')) {
