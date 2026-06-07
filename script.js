@@ -629,7 +629,14 @@ window.addEventListener('scroll', () => {
 // ============================================================
 function initScrollAnimations() {
   const targets = document.querySelectorAll('.anim-fade');
-  if (!targets.length || !('IntersectionObserver' in window)) {
+  if (!targets.length) return;
+
+  // Fallback: mark as visible after 600ms regardless
+  setTimeout(() => {
+    targets.forEach(el => el.classList.add('visible'));
+  }, 600);
+
+  if (!('IntersectionObserver' in window)) {
     targets.forEach(el => el.classList.add('visible')); return;
   }
   const observer = new IntersectionObserver(entries => {
@@ -639,7 +646,7 @@ function initScrollAnimations() {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
   targets.forEach(el => observer.observe(el));
 }
 
