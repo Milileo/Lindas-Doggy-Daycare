@@ -1,30 +1,14 @@
 
-/* ── Language visibility (default EN, DE hidden) ─────────────────────── */
-/* Inline elements (span, etc.) */
-.lang-de { display: none; }
-.lang-en { display: inline; }
-body[data-lang="de"] .lang-de { display: inline; }
-body[data-lang="de"] .lang-en { display: none; }
+/* ── Language visibility ─────────────────────────────────────────────── */
+[data-lang="en"] .lang-de,
+body:not([data-lang="de"]) .lang-de { display: none !important; }
 
-/* Block elements (p, div, li, etc.) that carry lang class */
-p.lang-de, div.lang-de, li.lang-de, ul.lang-de, ol.lang-de,
-h1.lang-de, h2.lang-de, h3.lang-de, h4.lang-de { display: none; }
+[data-lang="en"] .lang-en,
+body:not([data-lang="de"]) .lang-en { display: revert !important; }
 
-p.lang-en, div.lang-en, li.lang-en, ul.lang-en, ol.lang-en,
-h1.lang-en, h2.lang-en, h3.lang-en, h4.lang-en { display: block; }
-
-body[data-lang="de"] p.lang-de, body[data-lang="de"] div.lang-de,
-body[data-lang="de"] li.lang-de, body[data-lang="de"] ul.lang-de,
-body[data-lang="de"] ol.lang-de, body[data-lang="de"] h1.lang-de,
-body[data-lang="de"] h2.lang-de, body[data-lang="de"] h3.lang-de,
-body[data-lang="de"] h4.lang-de { display: block; }
-
-body[data-lang="de"] p.lang-en, body[data-lang="de"] div.lang-en,
-body[data-lang="de"] li.lang-en, body[data-lang="de"] ul.lang-en,
-body[data-lang="de"] ol.lang-en, body[data-lang="de"] h1.lang-en,
-body[data-lang="de"] h2.lang-en, body[data-lang="de"] h3.lang-en,
-body[data-lang="de"] h4.lang-en { display: none; }
-/* ──────────────────────────────────────────────────── */
+[data-lang="de"] .lang-en { display: none !important; }
+[data-lang="de"] .lang-de { display: revert !important; }
+/* ──────────────────────────────────────────────────────────────────────── */
 /* ============================================
    LINDA'S DOGGY DAYCARE – styles.css v3
    Colors: bg #8da4aa | accent #8ea5ab | white headlines
