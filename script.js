@@ -302,7 +302,7 @@ function generateId()  { return Date.now().toString(36) + Math.random().toString
 // ============================================================
 // REVIEW FORM — Submit
 // ============================================================
-async function submitReview(e) {
+async async function submitReview(e) {
   e.preventDefault();
 
   // Validate star selection
@@ -356,6 +356,8 @@ async function submitReview(e) {
           message:       text,
           publish_url:   publishUrl,
           date:          new Date().toLocaleDateString('de-DE'),
+          email:         'l.m@hotmail.ch',
+          to_email:      'l.m@hotmail.ch',
         });
         emailSent = true;
         console.log('[EmailJS] Notification sent ✓');
@@ -653,6 +655,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSlider();
   initLightbox();
   initScrollAnimations();
+  initEmailJS();
   loadReviews(); // called once here; setLang() no longer calls it
 });
 
