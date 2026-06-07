@@ -1,3 +1,17 @@
+
+/* ── Language visibility (default EN, DE hidden) ─────────────────────── */
+.lang-de { display: none; }
+.lang-en { display: inline; }
+body[data-lang="de"] .lang-de { display: inline; }
+body[data-lang="de"] .lang-en { display: none; }
+/* Block-level lang elements */
+.lang-de.block, section .lang-de { display: none; }
+.lang-en.block, section .lang-en { display: inline; }
+body[data-lang="de"] .lang-de.block,
+body[data-lang="de"] section .lang-de { display: inline; }
+body[data-lang="de"] .lang-en.block,
+body[data-lang="de"] section .lang-en { display: none; }
+/* ──────────────────────────────────────────────────── */
 /* ============================================
    LINDA'S DOGGY DAYCARE – styles.css v3
    Colors: bg #8da4aa | accent #8ea5ab | white headlines
