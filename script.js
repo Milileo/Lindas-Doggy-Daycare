@@ -519,11 +519,8 @@ function renderReviews(reviews) {
   const sorted = [...reviews].reverse();
 
   const slidesHtml = sorted.map((r, idx) => {
-    const MAX_CHARS = 320;
-    const fullText  = escHtml(r.text);
-    const isLong    = fullText.length > MAX_CHARS;
-    const shortText = isLong ? fullText.slice(0, MAX_CHARS).trimEnd() + '…' : fullText;
-    const uid       = 'rv-' + idx;
+    const fullText = escHtml(r.text);
+    const uid      = 'rv-' + idx;
     return `
     <div class="rv-slide">
       <div class="review-card">
@@ -532,13 +529,11 @@ function renderReviews(reviews) {
           <span class="review-author">${escHtml(r.name)}</span>
           <span class="review-date">${r.date || ''}</span>
         </div>
-        <p class="review-text" id="${uid}-text">
-          <span class="rv-short">&ldquo;${shortText}&rdquo;</span>
-          ${isLong ? `<span class="rv-full" style="display:none">&ldquo;${fullText}&rdquo;</span>` : ''}
-        </p>
-        ${isLong ? `<button class="rv-toggle" data-uid="${uid}" onclick="toggleReviewText('${uid}')">
+        <p class="review-text rv-clamped" id="${uid}-text">&ldquo;${fullText}&rdquo;</p>
+        <button class="rv-toggle" data-uid="${uid}" data-expanded="false"
+                onclick="toggleReviewText('${uid}')">
           <span class="lang-de">Mehr anzeigen ▾</span><span class="lang-en">Read more ▾</span>
-        </button>` : ''}
+        </button>
       </div>
     </div>`;
   }).join('');
@@ -594,21 +589,23 @@ async function loadReviews() {
 
 // ── Review text expand/collapse
 function toggleReviewText(uid) {
-  const shortEl = document.querySelector('#' + uid + '-text .rv-short');
-  const fullEl  = document.querySelector('#' + uid + '-text .rv-full');
-  const btn     = document.querySelector('[data-uid="' + uid + '"]');
-  if (!shortEl || !fullEl || !btn) return;
-
-  const isExpanded = fullEl.style.display !== 'none';
-  shortEl.style.display = isExpanded ? '' : 'none';
-  fullEl.style.display  = isExpanded ? 'none' : '';
-
-  const deSpan = btn.querySelector('.lang-de');
-  const enSpan = btn.querySelector('.lang-en');
-  if (isExpanded) {
+  const p   = document.getElementById(uid + '-text');
+  const btn = document.querySelector(`[data-uid="${uid}"]`);
+  if (!p || !btn) return;
+  const expanded = btn.dataset.expanded === 'true';
+  if (expanded) {
+    p.classList.add('rv-clamped');
+    btn.dataset.expanded = 'false';
+    const deSpan = btn.querySelector('.lang-de');
+    const enSpan = btn.querySelector('.lang-en');
+    if (deSpan) deSpan.textContent = 'Weniger anzeigen ▾'.replace('Weniger','Mehr').replace('▾','▾');
     if (deSpan) deSpan.textContent = 'Mehr anzeigen ▾';
     if (enSpan) enSpan.textContent = 'Read more ▾';
   } else {
+    p.classList.remove('rv-clamped');
+    btn.dataset.expanded = 'true';
+    const deSpan = btn.querySelector('.lang-de');
+    const enSpan = btn.querySelector('.lang-en');
     if (deSpan) deSpan.textContent = 'Weniger anzeigen ▴';
     if (enSpan) enSpan.textContent = 'Show less ▴';
   }
