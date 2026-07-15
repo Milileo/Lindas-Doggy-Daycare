@@ -668,27 +668,31 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
 /* ============================================
    REVIEW EXPAND / COLLAPSE
    ============================================ */
-.rv-short,
-.rv-full {
-  display: inline;
+/* Review text: max 8 Zeilen, aufklappbar */
+.rv-clamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .rv-toggle {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  margin-top:0.325rem;
+  margin-top: 0.4rem;
   background: none;
   border: none;
-  color: var(--accent-light, rgba(255,255,255,0.65));
-  font-size:0.72rem;
+  color: rgba(255,255,255,0.60);
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   cursor: pointer;
-  padding: 0.2rem 0;
+  padding: 0.15rem 0;
   transition: color 0.2s;
   text-decoration: underline;
   text-underline-offset: 3px;
+  line-height: 1;
 }
 
 .rv-toggle:hover {
