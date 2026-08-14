@@ -698,3 +698,44 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
 .rv-toggle:hover {
   color: #fff;
 }
+
+/* ── 4Vision Global Partnership ── */
+.vision4-partnership {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.75rem 1rem;
+  background: rgba(0, 0, 0, 0.08);
+  border-top: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
+}
+.vision4-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+.vision4-link:hover { opacity: 0.8; }
+.vision4-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  display: block;
+}
+.vision4-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+@media (min-width: 768px) {
+  .vision4-partnership { padding: 2rem 1rem; }
+  .vision4-logo { width: 100px; height: 100px; }
+  .vision4-text { font-size: 0.88rem; }
+}
