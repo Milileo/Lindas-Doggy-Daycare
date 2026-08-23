@@ -479,6 +479,39 @@ section:nth-child(even) { background: rgba(0,0,0,0.06); }
 .rv-prev { margin-right: 0.3rem; flex-shrink: 0; }
 .rv-next { margin-left: 0.3rem; flex-shrink: 0; }
 
+/* Bottom nav row: arrow • • • • arrow (mobile only) */
+.rv-nav-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+.rv-nav-bottom .slider-dots { margin-top: 0; }
+.rv-arrow-mobile { display: none; } /* hidden on desktop by default */
+
+@media (max-width: 599px) {
+  /* Hide the overlay arrows beside the cards on mobile */
+  .reviews-slider-outer .rv-arrow-desktop { display: none; }
+  .reviews-slider-outer { padding: 0; }
+
+  /* Show arrow • • • • arrow row below the cards instead */
+  .rv-arrow-mobile {
+    display: flex;
+    width: 38px;
+    height: 38px;
+    font-size: 1.5rem;
+  }
+
+  /* Cards fill almost the full screen width, 5px safety margin to screen edge */
+  .rv-slide {
+    flex: 0 0 100%;
+    min-width: 100%;
+    padding: 0 5px;
+    box-sizing: border-box;
+  }
+}
+
 .reviews-count-badge {
   display: inline-flex;
   align-items: center;
