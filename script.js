@@ -540,13 +540,17 @@ function renderReviews(reviews) {
 
   list.innerHTML = `
     <div class="reviews-slider-outer">
-      <button class="slider-btn rv-prev" aria-label="Previous" onclick="goToRvSlide(rvSliderIndex-1,${sorted.length})">&#8249;</button>
+      <button class="slider-btn rv-prev rv-arrow-desktop" aria-label="Previous" onclick="goToRvSlide(rvSliderIndex-1,${sorted.length})">&#8249;</button>
       <div class="reviews-viewport rv-viewport">
         <div class="slider-track" id="reviewsTrack" style="display:flex">${slidesHtml}</div>
       </div>
-      <button class="slider-btn rv-next" aria-label="Next" onclick="goToRvSlide(rvSliderIndex+1,${sorted.length})">&#8250;</button>
+      <button class="slider-btn rv-next rv-arrow-desktop" aria-label="Next" onclick="goToRvSlide(rvSliderIndex+1,${sorted.length})">&#8250;</button>
     </div>
-    <div class="slider-dots" id="reviewsDots"></div>`;
+    <div class="rv-nav-bottom">
+      <button class="slider-btn rv-prev rv-arrow-mobile" aria-label="Previous" onclick="goToRvSlide(rvSliderIndex-1,${sorted.length})">&#8249;</button>
+      <div class="slider-dots" id="reviewsDots"></div>
+      <button class="slider-btn rv-next rv-arrow-mobile" aria-label="Next" onclick="goToRvSlide(rvSliderIndex+1,${sorted.length})">&#8250;</button>
+    </div>`;
 
   // Sprache auf neue Review-Elemente anwenden
   setLang(currentLang);
