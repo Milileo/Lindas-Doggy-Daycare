@@ -33,8 +33,7 @@ const GALLERY_IMAGES = [
   'https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/57c3165ec_photo_2026-06-04_19-45-01.jpg',
   'https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/4374437b4_photo_2026-06-04_19-45-42.jpg',
   'https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/f2152c165_photo_2026-06-04_19-45-48.jpg',
-  'https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/ab11610ea_photo_2026-06-04_19-45-54.jpg',
-  'https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/33bbbe352_photo_2026-06-04_19-48-05.jpg'
+  'https://media.base44.com/images/public/6a217f32754a4d8eb71025d6/ab11610ea_photo_2026-06-04_19-45-54.jpg'
 ];
 
 // ============================================================
